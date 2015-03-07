@@ -1,4 +1,4 @@
-package es.upm.miw.jeeecp.models.entities;
+package es.upm.miw.jeeecp.models.utils;
 
 public enum NivelEstudios {
 

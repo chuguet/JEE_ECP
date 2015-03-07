@@ -1,6 +1,8 @@
 package es.upm.miw.jeeecp.models.entities;
 
-public class Voto {
+import es.upm.miw.jeeecp.models.utils.NivelEstudios;
+
+public class VotoEntity {
 
 	private Integer valoracion;
 	private String ip;

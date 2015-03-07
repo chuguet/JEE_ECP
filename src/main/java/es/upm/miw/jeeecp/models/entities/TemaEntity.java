@@ -2,11 +2,11 @@ package es.upm.miw.jeeecp.models.entities;
 
 import java.util.List;
 
-public class Tema {
+public class TemaEntity {
 
 	private Integer id;
 	private String pregunta;
-	private List<Voto> votos;
+	private List<VotoEntity> votos;
 
 	public Integer getId() {
 		return id;
@@ -24,11 +24,11 @@ public class Tema {
 		this.pregunta = pregunta;
 	}
 
-	public List<Voto> getVotos() {
+	public List<VotoEntity> getVotos() {
 		return votos;
 	}
 
-	public void setVotos(List<Voto> votos) {
+	public void setVotos(List<VotoEntity> votos) {
 		this.votos = votos;
 	}
 
