@@ -4,37 +4,51 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class TemaEntity {
 
-	@Id
-	private Integer id;
-	private String pregunta;
-	private List<VotoEntity> votos;
+    @Id
+    private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+    private String nombre;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    private String pregunta;
 
-	public String getPregunta() {
-		return pregunta;
-	}
+    @OneToMany
+    private List<VotoEntity> votos;
 
-	public void setPregunta(String pregunta) {
-		this.pregunta = pregunta;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public List<VotoEntity> getVotos() {
-		return votos;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setVotos(List<VotoEntity> votos) {
-		this.votos = votos;
-	}
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    public List<VotoEntity> getVotos() {
+        return votos;
+    }
+
+    public void setVotos(List<VotoEntity> votos) {
+        this.votos = votos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
 }

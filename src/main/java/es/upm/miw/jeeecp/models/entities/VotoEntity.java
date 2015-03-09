@@ -1,49 +1,66 @@
 package es.upm.miw.jeeecp.models.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 
 import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
 @Entity
 public class VotoEntity {
 
-	@Id
-	private Integer id;
-	private Integer valoracion;
-	private String ip;
-	private NivelEstudios nivelEstudios;
+    private static final String PATTERN_IP_ADDRESS = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
-	public Integer getValoracion() {
-		return valoracion;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	public void setValoracion(Integer valoracion) {
-		this.valoracion = valoracion;
-	}
+    @Max(10)
+    @Min(0)
+    private Integer valoracion;
 
-	public String getIp() {
-		return ip;
-	}
+    @Pattern(regexp = PATTERN_IP_ADDRESS)
+    private String ip;
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+    @Enumerated(EnumType.STRING)
+    private NivelEstudios nivelEstudios;
 
-	public NivelEstudios getNivelEstudios() {
-		return nivelEstudios;
-	}
+    public Integer getValoracion() {
+        return valoracion;
+    }
 
-	public void setNivelEstudios(NivelEstudios nivelEstudios) {
-		this.nivelEstudios = nivelEstudios;
-	}
+    public void setValoracion(Integer valoracion) {
+        this.valoracion = valoracion;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public String getIp() {
+        return ip;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public NivelEstudios getNivelEstudios() {
+        return nivelEstudios;
+    }
+
+    public void setNivelEstudios(NivelEstudios nivelEstudios) {
+        this.nivelEstudios = nivelEstudios;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 }
