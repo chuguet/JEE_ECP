@@ -2,7 +2,9 @@ package es.upm.miw.jeeecp.models.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -16,7 +18,7 @@ public class TemaEntity {
 
     private String pregunta;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<VotoEntity> votos;
 
     public Integer getId() {
