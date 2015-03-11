@@ -13,15 +13,28 @@ public class VotoDAOJpaTest {
 
     @Test
     public void createVotoTest() {
-        VotoEntity voto = new VotoEntity();
-        voto.setId(1);
-        voto.setIp("192.168.1.1");
-        voto.setNivelEstudios(NivelEstudios.BACHILLERATO);
-        voto.setValoracion(1);
+        VotoEntity voto;
         DAOFactory daoFactory = DAOFactory.getFactory();
         VotoDAO votoDAO = daoFactory.getVotoDAO();
+
+        voto = new VotoEntity(3, "192.168.1.1", NivelEstudios.BACHILLERATO);
         votoDAO.create(voto);
-        VotoEntity votoBD = votoDAO.read(1);
-        assertEquals(NivelEstudios.BACHILLERATO, votoBD.getNivelEstudios());
+        voto = new VotoEntity(5, "192.168.1.1", NivelEstudios.BACHILLERATO);
+        votoDAO.create(voto);
+        voto = new VotoEntity(2, "192.168.1.1", NivelEstudios.LICENCIADO);
+        votoDAO.create(voto);
+        voto = new VotoEntity(5, "192.168.1.1", NivelEstudios.DIPLOMADO);
+        votoDAO.create(voto);
+        voto = new VotoEntity(9, "192.168.1.1", NivelEstudios.DIPLOMADO);
+        votoDAO.create(voto);
+        voto = new VotoEntity(7, "192.168.1.1", NivelEstudios.DIPLOMADO);
+        votoDAO.create(voto);
+
+        assertEquals(new Double(3.5), votoDAO.recuperarMediaVotacionesPorNivelDeEstudiosYTema(1,
+                NivelEstudios.BACHILLERATO));
+        assertEquals(new Double(3.5),
+                votoDAO.recuperarMediaVotacionesPorNivelDeEstudiosYTema(1, NivelEstudios.DIPLOMADO));
+        assertEquals(new Double(7), votoDAO.recuperarMediaVotacionesPorNivelDeEstudiosYTema(1,
+                NivelEstudios.LICENCIADO));
     }
 }
