@@ -4,6 +4,6 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 
 public interface TemaDAO extends GenericDAO<TemaEntity, Integer> {
 
-    Long countVotos(Integer id);
+    Long countVotos(Integer idTema);
 
 }

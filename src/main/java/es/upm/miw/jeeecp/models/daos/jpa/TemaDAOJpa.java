@@ -17,13 +17,13 @@ public class TemaDAOJpa extends GenericDAOJpa<TemaEntity, Integer> implements Te
     }
 
     @Override
-    public Long countVotos(Integer id) {
+    public Long countVotos(Integer idTema) {
         EntityManager entityManager = DAOJpaFactory.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> query = builder.createQuery(Long.class);
         Root<TemaEntity> root = query.from(TemaEntity.class);
         query.select(builder.count(root.get("votos")));
-        Predicate predicate = builder.equal(root.get("id").as(Integer.class), id);
+        Predicate predicate = builder.equal(root.get("id").as(Integer.class), idTema);
         query.where(predicate);
         TypedQuery<Long> typedQuery = entityManager.createQuery(query);
         Long result = typedQuery.getSingleResult();
