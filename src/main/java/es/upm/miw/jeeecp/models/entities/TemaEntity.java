@@ -1,5 +1,6 @@
 package es.upm.miw.jeeecp.models.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -43,6 +44,13 @@ public class TemaEntity {
 
     public void setVotos(List<VotoEntity> votos) {
         this.votos = votos;
+    }
+
+    public void addVoto(VotoEntity voto) {
+        if (this.votos == null) {
+            this.votos = new ArrayList<VotoEntity>();
+        }
+        this.votos.add(voto);
     }
 
     public String getNombre() {
