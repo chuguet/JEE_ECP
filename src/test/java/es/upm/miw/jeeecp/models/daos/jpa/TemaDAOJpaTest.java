@@ -48,35 +48,11 @@ public class TemaDAOJpaTest {
     }
 
     @Test
-    public void testUpdate() {
-        // dao.deleteByID(data.getPiece().getId());
-        // dao.read(data.getPiece().getId());
-        // dao.update(data.getPiece());
-    }
-
-    @Test
-    public void testDelete() {
-
-    }
-
-    @Test
-    public void testDeleteByID() {
-
-    }
-
-    @Test
-    public void testDeleteByCoordinate() {
-
-    }
-
-    @Test
-    public void testRead() {
-
-    }
-
-    @Test
-    public void testFindAll() {
-
+    public void testCountVotos() {
+        List<TemaEntity> temasData = this.saveData();
+        for (TemaEntity tema : temasData) {
+            assertTrue(tema.getVotos().size() == dao.countVotos(tema.getId()));
+        }
     }
 
 }
