@@ -19,7 +19,7 @@ public class VotoDAOJpaTest {
 
         voto = new VotoEntity(3, "192.168.1.1", NivelEstudios.BACHILLERATO);
         votoDAO.create(voto);
-        voto = new VotoEntity(5, "192.168.1.1", NivelEstudios.BACHILLERATO);
+        voto = new VotoEntity(4, "192.168.1.1", NivelEstudios.BACHILLERATO);
         votoDAO.create(voto);
         voto = new VotoEntity(2, "192.168.1.1", NivelEstudios.LICENCIADO);
         votoDAO.create(voto);
@@ -32,9 +32,9 @@ public class VotoDAOJpaTest {
 
         assertEquals(new Double(3.5), votoDAO.recuperarMediaVotacionesPorNivelDeEstudiosYTema(1,
                 NivelEstudios.BACHILLERATO));
-        assertEquals(new Double(3.5),
+        assertEquals(new Double(7),
                 votoDAO.recuperarMediaVotacionesPorNivelDeEstudiosYTema(1, NivelEstudios.DIPLOMADO));
-        assertEquals(new Double(7), votoDAO.recuperarMediaVotacionesPorNivelDeEstudiosYTema(1,
+        assertEquals(new Double(2), votoDAO.recuperarMediaVotacionesPorNivelDeEstudiosYTema(1,
                 NivelEstudios.LICENCIADO));
     }
 }

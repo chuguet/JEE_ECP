@@ -4,8 +4,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import es.upm.miw.jeeecp.models.daos.VotoDAO;
 import es.upm.miw.jeeecp.models.entities.VotoEntity;
@@ -21,18 +22,14 @@ public class VotoDAOJpa extends GenericDAOJpa<VotoEntity, Integer> implements Vo
     public Double recuperarMediaVotacionesPorNivelDeEstudiosYTema(Integer idTema,
             NivelEstudios nivelEstudios) {
         EntityManager entityManager = DAOJpaFactory.getEntityManagerFactory().createEntityManager();
-        Metamodel metaModel = entityManager.getMetamodel();
-        EntityType<VotoEntity> VotoEntity_ = metaModel.entity(VotoEntity.class);
-
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Double> query = builder.createQuery(Double.class);
-        // Root<VotoEntity> root = query.from(VotoEntity_.getClass());
-
-        // query.select(builder.avg(root.get(VotoEntity_.getv));
-        // Predicate predicate =
-        // builder.equal(root.get("nivelEstudios").as(NivelEstudios.class),
-        // nivelEstudios);
-        // query.where(predicate);
+        Root<VotoEntity> root = query.from(VotoEntity.class);
+        Expression<Number> exp = root.get("valoracion");
+        query.multiselect(builder.avg(exp));
+        Predicate predicate = builder.equal(root.get("nivelEstudios").as(NivelEstudios.class),
+                nivelEstudios);
+        query.where(predicate);
 
         TypedQuery<Double> typedQuery = entityManager.createQuery(query);
         Double result = typedQuery.getSingleResult();
