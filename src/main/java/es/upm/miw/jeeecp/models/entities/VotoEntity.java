@@ -23,6 +23,16 @@ public class VotoEntity {
     @Enumerated(EnumType.STRING)
     private NivelEstudios nivelEstudios;
 
+    public VotoEntity() {
+
+    }
+
+    public VotoEntity(Integer valoracion, String ip, NivelEstudios nivelEstudios) {
+        this.valoracion = valoracion;
+        this.ip = ip;
+        this.nivelEstudios = nivelEstudios;
+    }
+
     public Integer getValoracion() {
         return valoracion;
     }

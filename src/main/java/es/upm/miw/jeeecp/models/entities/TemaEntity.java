@@ -22,6 +22,17 @@ public class TemaEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<VotoEntity> votos;
 
+    public TemaEntity() {
+
+    }
+
+    public TemaEntity(Integer id, String nombre, String pregunta, List<VotoEntity> votos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.pregunta = pregunta;
+        this.votos = votos;
+    }
+
     public Integer getId() {
         return id;
     }
