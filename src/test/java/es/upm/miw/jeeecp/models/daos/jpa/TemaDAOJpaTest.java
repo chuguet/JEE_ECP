@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.upm.miw.jeeecp.models.daos.DAOFactory;
 import es.upm.miw.jeeecp.models.daos.TemaDAO;
 import es.upm.miw.jeeecp.models.daos.jpa.data.TemaDAOJpaTestData;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
@@ -18,8 +20,14 @@ public class TemaDAOJpaTest {
 
     private TemaDAOJpaTestData data;
 
+    @BeforeClass
+    public static void beforeClass() {
+        DAOFactory.setFactory(new DAOJpaFactory());
+        DAOJpaFactory.dropAndCreateTables();
+    }
+
     @Before
-    public void inti() {
+    public void init() {
         data = new TemaDAOJpaTestData();
     }
 
