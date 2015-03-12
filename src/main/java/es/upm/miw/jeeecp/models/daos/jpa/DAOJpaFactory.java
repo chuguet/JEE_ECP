@@ -35,7 +35,6 @@ public class DAOJpaFactory extends DAOFactory {
         properties.put(PersistenceUnitProperties.DDL_GENERATION,
                 PersistenceUnitProperties.DROP_AND_CREATE);
         entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT, properties);
-        LogManager.getLogger("Vuelvo las tablas");
     }
 
     @Override
