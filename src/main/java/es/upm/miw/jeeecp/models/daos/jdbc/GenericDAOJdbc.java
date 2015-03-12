@@ -1,39 +1,60 @@
 package es.upm.miw.jeeecp.models.daos.jdbc;
 
-import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import es.upm.miw.jeeecp.models.daos.GenericDAO;
 
-public class GenericDAOJdbc<T, ID> implements GenericDAO<T, ID> {
+public abstract class GenericDAOJdbc<T, ID> implements GenericDAO<T, ID> {
 
-    @Override
-    public void create(T entity) {
-        // TODO Auto-generated method stub
+    protected static final String SQL_SELECT_ID = "SELECT * FROM %s WHERE ID=%d";
 
-    }
+    protected static final String SQL_SELECT_ALL = "SELECT * FROM %s";
 
-    @Override
-    public T read(ID id) {
-        // TODO Auto-generated method stub
+    protected static final String SQL_DELETE_ID = "DELETE FROM %s WHERE ID=%d";
+
+    protected static final String SQL_SELECT_LAST_ID = "SELECT LAST_INSERT_ID()";
+
+    private Logger log = LogManager.getLogger(GenericDAOJdbc.class);
+
+    public ResultSet query(String sql) {
+        try {
+            Statement statement = DAOJdbcFactory.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            this.log.debug("Query: " + sql);
+            return resultSet;
+        } catch (SQLException e) {
+            this.log.error("Query SQL: ---" + sql + "---");
+            this.log.error(e.getMessage());
+        }
         return null;
     }
 
-    @Override
-    public void update(T entity) {
-        // TODO Auto-generated method stub
-
+    public void updateSql(String sql) {
+        try {
+            Statement statement = DAOJdbcFactory.getConnection().createStatement();
+            statement.executeUpdate(sql);
+            this.log.debug("UpdateSql: " + sql);
+        } catch (SQLException e) {
+            this.log.error("Update SQL: ---" + sql + "---");
+            this.log.error(e.getMessage());
+        }
     }
 
-    @Override
-    public void deleteById(ID id) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public List<T> findAll() {
-        // TODO Auto-generated method stub
-        return null;
+    public int autoId() {
+        ResultSet resulSet = this.query(SQL_SELECT_LAST_ID);
+        try {
+            resulSet.next();
+            return resulSet.getInt(1);
+        } catch (SQLException e) {
+            this.log.error("Query SQL: ---" + SQL_SELECT_LAST_ID + "---");
+            this.log.error(e.getMessage());
+        }
+        return -1;
     }
 
 }

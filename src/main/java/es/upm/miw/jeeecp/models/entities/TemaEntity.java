@@ -12,10 +12,18 @@ import javax.persistence.OneToMany;
 @Entity
 public class TemaEntity {
 
+    public static final String TABLE = "temaentity";
+
+    public static final String ID = "ID";
+
     @Id
     private Integer id;
 
+    public static final String NOMBRE = "NOMBRE";
+
     private String nombre;
+
+    public static final String PREGUNTA = "PREGUNTA";
 
     private String pregunta;
 
