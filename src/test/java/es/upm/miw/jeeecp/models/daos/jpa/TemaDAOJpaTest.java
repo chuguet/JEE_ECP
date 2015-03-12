@@ -1,5 +1,7 @@
 package es.upm.miw.jeeecp.models.daos.jpa;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -47,6 +49,45 @@ public class TemaDAOJpaTest {
 
     @Test
     public void testCreate() {
+        List<TemaEntity> temasData = this.saveData();
+        List<TemaEntity> temas = dao.findAll();
+        for (TemaEntity tema : temasData) {
+            assertTrue(temas.contains(tema));
+        }
+        assertTrue(temas.size() == temasData.size());
+    }
+
+    @Test
+    public void testRead() {
+        List<TemaEntity> temasData = this.saveData();
+        for (TemaEntity tema : temasData) {
+            assertEquals(tema, dao.read(tema.getId()));
+        }
+    }
+
+    @Test
+    public void testUpdate() {
+        TemaEntity temaTemporal;
+        List<TemaEntity> temasData = this.saveData();
+        for (TemaEntity tema : temasData) {
+            temaTemporal = dao.read(tema.getId());
+            temaTemporal.setNombre("TEMPORAL");
+            dao.update(temaTemporal);
+            assertNotEquals(tema, dao.read(tema.getId()));
+        }
+    }
+
+    @Test
+    public void testDeleteById() {
+        List<TemaEntity> temasData = this.saveData();
+        for (TemaEntity tema : temasData) {
+            dao.deleteById(tema.getId());
+        }
+        assertTrue(dao.findAll().isEmpty());
+    }
+
+    @Test
+    public void testFindAll() {
         List<TemaEntity> temasData = this.saveData();
         List<TemaEntity> temas = dao.findAll();
         for (TemaEntity tema : temasData) {
