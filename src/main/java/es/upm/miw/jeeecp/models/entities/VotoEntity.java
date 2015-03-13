@@ -12,57 +12,99 @@ import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 @Entity
 public class VotoEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    private Integer valoracion;
+	private Integer valoracion;
 
-    private String ip;
+	private String ip;
 
-    @Enumerated(EnumType.STRING)
-    private NivelEstudios nivelEstudios;
+	@Enumerated(EnumType.STRING)
+	private NivelEstudios nivelEstudios;
 
-    public VotoEntity() {
+	public VotoEntity() {
 
-    }
+	}
 
-    public VotoEntity(Integer valoracion, String ip, NivelEstudios nivelEstudios) {
-        this.valoracion = valoracion;
-        this.ip = ip;
-        this.nivelEstudios = nivelEstudios;
-    }
+	public VotoEntity(Integer valoracion, String ip, NivelEstudios nivelEstudios) {
+		this.valoracion = valoracion;
+		this.ip = ip;
+		this.nivelEstudios = nivelEstudios;
+	}
 
-    public Integer getValoracion() {
-        return valoracion;
-    }
+	public Integer getValoracion() {
+		return valoracion;
+	}
 
-    public void setValoracion(Integer valoracion) {
-        this.valoracion = valoracion;
-    }
+	public void setValoracion(Integer valoracion) {
+		this.valoracion = valoracion;
+	}
 
-    public String getIp() {
-        return ip;
-    }
+	public String getIp() {
+		return ip;
+	}
 
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 
-    public NivelEstudios getNivelEstudios() {
-        return nivelEstudios;
-    }
+	public NivelEstudios getNivelEstudios() {
+		return nivelEstudios;
+	}
 
-    public void setNivelEstudios(NivelEstudios nivelEstudios) {
-        this.nivelEstudios = nivelEstudios;
-    }
+	public void setNivelEstudios(NivelEstudios nivelEstudios) {
+		this.nivelEstudios = nivelEstudios;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((ip == null) ? 0 : ip.hashCode());
+		result = prime * result
+				+ ((nivelEstudios == null) ? 0 : nivelEstudios.hashCode());
+		result = prime * result
+				+ ((valoracion == null) ? 0 : valoracion.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VotoEntity other = (VotoEntity) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (ip == null) {
+			if (other.ip != null)
+				return false;
+		} else if (!ip.equals(other.ip))
+			return false;
+		if (nivelEstudios != other.nivelEstudios)
+			return false;
+		if (valoracion == null) {
+			if (other.valoracion != null)
+				return false;
+		} else if (!valoracion.equals(other.valoracion))
+			return false;
+		return true;
+	}
 
 }
