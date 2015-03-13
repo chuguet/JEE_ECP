@@ -15,7 +15,6 @@ import es.upm.miw.jeeecp.models.daos.DAOFactory;
 import es.upm.miw.jeeecp.models.daos.TemaDAO;
 import es.upm.miw.jeeecp.models.daos.jpa.data.TemaDAOJpaTestData;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
-import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
 public class TemaDAOJpaTest {
 
@@ -102,14 +101,6 @@ public class TemaDAOJpaTest {
         List<TemaEntity> temasData = this.saveData();
         for (TemaEntity tema : temasData) {
             assertTrue(tema.getVotos().size() == dao.retrieveVotosFromTema(tema.getId()).size());
-        }
-    }
-    
-    @Test
-    public void testRetrieveVotosByNivelEstudiosAndTema() {
-        List<TemaEntity> temasData = this.saveData();
-        for (TemaEntity tema : temasData) {
-//            assertTrue(tema.getVotos().size() == dao.retrieveVotosByNivelDeEstudiosAndTema(tema.getId(), NivelEstudios.BACHILLERATO));
         }
     }
 
