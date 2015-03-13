@@ -16,8 +16,6 @@ import es.upm.miw.jeeecp.models.daos.DAOFactory;
 import es.upm.miw.jeeecp.models.daos.TemaDAO;
 import es.upm.miw.jeeecp.models.daos.jpa.data.TemaDAOJpaTestData;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
-import es.upm.miw.jeeecp.models.entities.VotoEntity;
-import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
 public class TemaDAOJpaTest {
 
@@ -35,11 +33,11 @@ public class TemaDAOJpaTest {
 	public void init() {
 		data = new TemaDAOJpaTestData();
 	}
-	
+
 	@After
 	public void finish() {
 		List<TemaEntity> temas = dao.findAll();
-		for(TemaEntity tema : temas){
+		for (TemaEntity tema : temas) {
 			dao.deleteById(tema.getId());
 		}
 	}
@@ -114,28 +112,6 @@ public class TemaDAOJpaTest {
 			assertTrue(tema.getVotos().size() == dao.retrieveVotosFromTema(
 					tema.getId()).size());
 		}
-	}
-
-	@Test
-	public void testRetrieveVotosByNivelEstudiosAndTema() {
-		List<TemaEntity> temasData = this.saveData();
-		for (TemaEntity tema : temasData) {
-			assertEquals(this.getVotosByNivelEstudios(tema,
-					NivelEstudios.BACHILLERATO),
-					dao.retrieveVotosByNivelDeEstudiosAndTema(tema.getId(),
-							NivelEstudios.BACHILLERATO));
-		}
-	}
-
-	private List<VotoEntity> getVotosByNivelEstudios(TemaEntity tema,
-			NivelEstudios nivelEstudios) {
-		List<VotoEntity> votos = new ArrayList<VotoEntity>();
-		for (VotoEntity voto : tema.getVotos()) {
-			if (voto.getNivelEstudios().equals(nivelEstudios)) {
-				votos.add(voto);
-			}
-		}
-		return votos;
 	}
 
 }
