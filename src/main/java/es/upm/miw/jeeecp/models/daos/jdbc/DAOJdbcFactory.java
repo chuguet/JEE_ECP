@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import es.upm.miw.jeeecp.models.daos.DAOFactory;
 import es.upm.miw.jeeecp.models.daos.TemaDAO;
 import es.upm.miw.jeeecp.models.daos.VotoDAO;
-import es.upm.miw.jeeecp.models.entities.TemaEntity;
+import es.upm.miw.jeeecp.models.entities.VotoEntity;
 
 public class DAOJdbcFactory extends DAOFactory {
 
@@ -45,8 +45,8 @@ public class DAOJdbcFactory extends DAOFactory {
     public static void dropAndCreateTables() {
         try {
             Statement statement = getConnection().createStatement();
-            statement.executeUpdate(String.format(DROP_TABLE, TemaEntity.TABLE));
-            statement.executeUpdate(TemaDAOJdbc.sqlToCreateTable());
+            statement.executeUpdate(String.format(DROP_TABLE, VotoEntity.TABLE));
+            statement.executeUpdate(VotoDAOJdbc.sqlToCreateTable());
         } catch (SQLException e) {
             LogManager.getLogger(DAOJdbcFactory.class).error("Drop tables: " + e.getMessage());
         }
@@ -54,12 +54,12 @@ public class DAOJdbcFactory extends DAOFactory {
 
     @Override
     public TemaDAO getTemaDAO() {
-        return new TemaDAOJdbc();
+        return null;
     }
 
     @Override
     public VotoDAO getVotoDAO() {
-        return null;
+        return new VotoDAOJdbc();
     }
 
 }

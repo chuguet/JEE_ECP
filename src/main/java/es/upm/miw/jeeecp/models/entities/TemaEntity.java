@@ -12,103 +12,96 @@ import javax.persistence.OneToMany;
 @Entity
 public class TemaEntity {
 
-    public static final String TABLE = "temaentity";
+	@Id
+	private Integer id;
 
-    public static final String ID = "ID";
+	private String nombre;
 
-    @Id
-    private Integer id;
+	private String pregunta;
 
-    public static final String NOMBRE = "NOMBRE";
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<VotoEntity> votos;
 
-    private String nombre;
+	public TemaEntity() {
 
-    public static final String PREGUNTA = "PREGUNTA";
+	}
 
-    private String pregunta;
+	public TemaEntity(Integer id, String nombre, String pregunta,
+			List<VotoEntity> votos) {
+		this.id = id;
+		this.nombre = nombre;
+		this.pregunta = pregunta;
+		this.votos = votos;
+	}
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<VotoEntity> votos;
+	public Integer getId() {
+		return id;
+	}
 
-    public TemaEntity() {
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    }
+	public String getPregunta() {
+		return pregunta;
+	}
 
-    public TemaEntity(Integer id, String nombre, String pregunta, List<VotoEntity> votos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.pregunta = pregunta;
-        this.votos = votos;
-    }
+	public void setPregunta(String pregunta) {
+		this.pregunta = pregunta;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public List<VotoEntity> getVotos() {
+		return votos;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setVotos(List<VotoEntity> votos) {
+		this.votos = votos;
+	}
 
-    public String getPregunta() {
-        return pregunta;
-    }
+	public void addVoto(VotoEntity voto) {
+		if (this.votos == null) {
+			this.votos = new ArrayList<VotoEntity>();
+		}
+		this.votos.add(voto);
+	}
 
-    public void setPregunta(String pregunta) {
-        this.pregunta = pregunta;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public List<VotoEntity> getVotos() {
-        return votos;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setVotos(List<VotoEntity> votos) {
-        this.votos = votos;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
 
-    public void addVoto(VotoEntity voto) {
-        if (this.votos == null) {
-            this.votos = new ArrayList<VotoEntity>();
-        }
-        this.votos.add(voto);
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        TemaEntity other = (TemaEntity) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
-            return false;
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TemaEntity other = (TemaEntity) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
 
 }

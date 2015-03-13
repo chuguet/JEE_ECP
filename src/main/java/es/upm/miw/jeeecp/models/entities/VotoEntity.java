@@ -12,13 +12,23 @@ import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 @Entity
 public class VotoEntity {
 
+	public static final String TABLE = "votoentity";
+
+	public static final String ID = "ID";
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	public static final String VALORACION = "VALORACION";
+
 	private Integer valoracion;
 
+	public static final String IP = "IP";
+
 	private String ip;
+
+	public static final String NIVELESTUDIOS = "NIVELESTUDIOS";
 
 	@Enumerated(EnumType.STRING)
 	private NivelEstudios nivelEstudios;
@@ -27,6 +37,11 @@ public class VotoEntity {
 
 	}
 
+	public VotoEntity(Integer id, Integer valoracion, String ip, NivelEstudios nivelEstudios) {
+		this(valoracion, ip, nivelEstudios);
+		this.id = id;
+	}
+	
 	public VotoEntity(Integer valoracion, String ip, NivelEstudios nivelEstudios) {
 		this.valoracion = valoracion;
 		this.ip = ip;
