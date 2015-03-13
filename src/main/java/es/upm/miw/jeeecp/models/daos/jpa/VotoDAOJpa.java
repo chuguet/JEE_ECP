@@ -9,6 +9,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.eclipse.persistence.jpa.JpaQuery;
+
 import es.upm.miw.jeeecp.models.daos.VotoDAO;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 import es.upm.miw.jeeecp.models.entities.VotoEntity;
@@ -39,6 +41,7 @@ public class VotoDAOJpa extends GenericDAOJpa<VotoEntity, Integer> implements
 		TypedQuery<VotoEntity> typedQuery = entityManager.createQuery(query);
 		List<VotoEntity> result = typedQuery.getResultList();
 		entityManager.close();
+        System.out.println(typedQuery.unwrap(JpaQuery.class).getDatabaseQuery().getSQLString());
 		return result;
 	}
 
