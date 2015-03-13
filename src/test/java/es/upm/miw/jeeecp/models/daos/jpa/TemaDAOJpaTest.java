@@ -97,10 +97,10 @@ public class TemaDAOJpaTest {
     }
 
     @Test
-    public void testCountVotos() {
+    public void testRetrieveVotosFromTema() {
         List<TemaEntity> temasData = this.saveData();
         for (TemaEntity tema : temasData) {
-            assertTrue(tema.getVotos().size() == dao.countVotos(tema.getId()));
+            assertTrue(tema.getVotos().size() == dao.retrieveVotosFromTema(tema.getId()).size());
         }
     }
 

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import es.upm.miw.jeeecp.models.daos.TemaDAO;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
+import es.upm.miw.jeeecp.models.entities.VotoEntity;
 
 public class TemaDAOJdbc extends GenericDAOJdbc<TemaEntity, Integer> implements TemaDAO {
 
@@ -58,8 +59,8 @@ public class TemaDAOJdbc extends GenericDAOJdbc<TemaEntity, Integer> implements 
     }
 
     @Override
-    public Long countVotos(Integer idTema) {
-        return (long) this.read(idTema).getVotos().size();
+	public List<VotoEntity> retrieveVotosFromTema(Integer idTema) {
+        return this.read(idTema).getVotos();
     }
 
     private List<TemaEntity> mapperListResultSet(ResultSet resultSet) {
