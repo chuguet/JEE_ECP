@@ -1,28 +1,27 @@
 package es.upm.miw.jeeecp.models.daos.jpa;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.upm.miw.jeeecp.models.daos.DAOFactory;
-import es.upm.miw.jeeecp.models.daos.TemaDAO;
 import es.upm.miw.jeeecp.models.daos.VotoDAO;
-import es.upm.miw.jeeecp.models.daos.jpa.data.TemaDAOJpaTestData;
-import es.upm.miw.jeeecp.models.entities.TemaEntity;
+import es.upm.miw.jeeecp.models.daos.jpa.data.VotoDAOJpaTestData;
 import es.upm.miw.jeeecp.models.entities.VotoEntity;
-import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
 public class VotoDAOJpaTest {
 
-	private VotoDAO daoVoto = DAOJpaFactory.getFactory().getVotoDAO();
-	private TemaDAO daoTema = DAOJpaFactory.getFactory().getTemaDAO();
+	private VotoDAO dao = DAOJpaFactory.getFactory().getVotoDAO();
 
-	private TemaDAOJpaTestData data;
+	private VotoDAOJpaTestData data;
 
 	@BeforeClass
 	public static void beforeClass() {
@@ -31,40 +30,79 @@ public class VotoDAOJpaTest {
 	}
 
 	@Before
-	public void inti() {
-		data = new TemaDAOJpaTestData();
+	public void init() {
+		data = new VotoDAOJpaTestData();
 	}
-
-	private List<TemaEntity> saveData() {
-        List<TemaEntity> temasData = new ArrayList<TemaEntity>();
-        while (data.hasNextTemas()) {
-            if (data.getTema() != null) {
-            	daoTema.create(data.getTema());
-                temasData.add(data.getTema());
-            }
-            data.nextTema();
-        }
-        daoTema.create(data.getTema());
-        temasData.add(data.getTema());
-        return temasData;
-    }
 	
-    @Test
-    public void testRetrieveVotosByNivelEstudiosAndTema() {
-        List<TemaEntity> temasData = this.saveData();
-        for (TemaEntity tema : temasData) {
-            assertEquals(this.getVotosByNivelEstudios(tema, NivelEstudios.BACHILLERATO), daoVoto.retrieveVotosByNivelDeEstudiosAndTema(tema.getId(), NivelEstudios.BACHILLERATO));
-        }
-    }
-
-	private List<VotoEntity> getVotosByNivelEstudios(TemaEntity tema, NivelEstudios nivelEstudios) {
-		List<VotoEntity> votos = new ArrayList<VotoEntity>();
-		for(VotoEntity voto : tema.getVotos()) {
-			if(voto.getNivelEstudios().equals(nivelEstudios)){
-				votos.add(voto);
-			}
+	@After
+	public void finish() {
+		List<VotoEntity> votos = dao.findAll();
+		for(VotoEntity voto : votos){
+			dao.deleteById(voto.getId());
 		}
-		return votos;
 	}
 	
+	private List<VotoEntity> saveData() {
+		List<VotoEntity> votosData = new ArrayList<VotoEntity>();
+		while (data.hasNextVotos()) {
+			if (data.getVoto() != null) {
+				dao.create(data.getVoto());
+				votosData.add(data.getVoto());
+			}
+			data.nextVoto();
+		}
+		dao.create(data.getVoto());
+		votosData.add(data.getVoto());
+		return votosData;
+	}
+
+	@Test
+	public void testCreate() {
+		List<VotoEntity> votosData = this.saveData();
+		List<VotoEntity> votos = dao.findAll();
+		for (VotoEntity voto : votosData) {
+			assertTrue(votos.contains(voto));
+		}
+		assertTrue(votos.size() == votosData.size());
+	}
+
+	@Test
+	public void testRead() {
+		List<VotoEntity> votosData = this.saveData();
+		for (VotoEntity voto : votosData) {
+			assertEquals(voto, dao.read(voto.getId()));
+		}
+	}
+
+	@Test
+	public void testUpdate() {
+		VotoEntity votoTemporal;
+		List<VotoEntity> votosData = this.saveData();
+		for (VotoEntity voto : votosData) {
+			votoTemporal = dao.read(voto.getId());
+			votoTemporal.setValoracion(0);
+			dao.update(votoTemporal);
+			assertNotEquals(voto, dao.read(voto.getId()));
+		}
+	}
+
+	@Test
+	public void testDeleteById() {
+		List<VotoEntity> votosData = this.saveData();
+		for (VotoEntity voto : votosData) {
+			dao.deleteById(voto.getId());
+		}
+		assertTrue(dao.findAll().isEmpty());
+	}
+
+	@Test
+	public void testFindAll() {
+		List<VotoEntity> votosData = this.saveData();
+		List<VotoEntity> votos = dao.findAll();
+		for (VotoEntity voto : votosData) {
+			assertTrue(votos.contains(voto));
+		}
+		assertTrue(votos.size() == votosData.size());
+	}
+
 }

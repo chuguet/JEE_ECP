@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import es.upm.miw.jeeecp.models.daos.TemaDAO;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 import es.upm.miw.jeeecp.models.entities.VotoEntity;
+import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
 public class TemaDAOJdbc extends GenericDAOJdbc<TemaEntity, Integer> implements TemaDAO {
 
@@ -90,5 +91,12 @@ public class TemaDAOJdbc extends GenericDAOJdbc<TemaEntity, Integer> implements 
         }
         return result;
     }
+
+	@Override
+	public List<VotoEntity> retrieveVotosByNivelDeEstudiosAndTema(
+			Integer idTema, NivelEstudios nivelEstudios) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
