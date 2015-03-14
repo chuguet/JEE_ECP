@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"        
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<title>JSF 2.0</title>
+<title>Home JSF</title>
 </h:head>
 <h:body>
-	<h3>Home</h3>
+
+	<h2>Seleccione una ópcion</h2>
+	
+		<h:link value="Ir a votar" outcome="votarPage"/><br/>
+		<h:link value="Ir a ver votaciones" outcome="verVotacionesPage"/><br/>
+		<h:link value="Ir a añadir tema" outcome="anadirTemaPage"/><br/>
+		<h:link value="Ir a eliminar tema" outcome="eliminarTemaPage"/>
+		
 </h:body>
 </html>

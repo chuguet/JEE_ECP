@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"        
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-	<title>JSF 2.0</title>
-</h:head>
-<h:body>
-	<h3>Eliminar tema</h3>
-</h:body>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Eliminar Tema</title>
+</head>
+<body>
+	<h2>Eliminar tema</h2>
+
+		<c:choose>
+			<c:when test="${bean.autorizacion==666}">
+				<h5>Seleccione el tema que desea borrar:</h5>
+			    <form method="POST" action="/JEE_ECP/jsp/eliminarTema">
+					<input type="hidden" name="autorizacion" value="${bean.autorizacion}"/>
+					<c:forEach items="${bean.temas}" var="tema">
+							<input type="radio" name="id" value="${tema.id}"/>${tema.nombre}
+							<br/>
+					</c:forEach>
+					<br/>
+					<input type="submit" value="Borrar" />
+				</form>
+			</c:when>
+			<c:otherwise>
+				<form method="POST" action="/JEE_ECP/jsp/eliminarTema">
+					<label for="autorizacion">C&oacute;digo de autorizaci&oacute;n</label>
+					<input id="autorizacion" name="autorizacion" type="text" value="${bean.autorizacion}"/> <br/>
+					<input type="submit" value="Enviar"/>
+				</form>
+			</c:otherwise>
+		</c:choose>
+		
+		<br/><br/>
+		<a href="/JEE_ECP/jsp/home">Volver a home</a>
+</body>
 </html>
