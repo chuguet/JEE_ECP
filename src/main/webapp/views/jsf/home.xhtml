@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{msgs.language}"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
+<f:view locale="#{i18n.locale}">
 <h:head>
-<title>#{msgs.hometitle}</title>
+<title>#{msgs.indiceTitulo}</title>
 </h:head>
 <h:body>
 
-	<h2>#{msgs.opcion}</h2>
+	<h2>#{msgs.seleccionarOpcion}</h2>
 	
-		<h:link value="#{msgs.irvotar}" outcome="votarPage"/><br/>
-		<h:link value="#{msgs.irvervotaciones}" outcome="verVotacionesPage"/><br/>
-		<h:link value="#{msgs.iranadirtema}" outcome="anadirTemaPage"/><br/>
-		<h:link value="#{msgs.ireliminartema}" outcome="eliminarTemaPage"/><br/>
+		<h:link value="#{msgs.irVotar}" outcome="votarPage"/><br/>
+		<h:link value="#{msgs.irVerVotaciones}" outcome="verVotacionesPage"/><br/>
+		<h:link value="#{msgs.irAnadirTema}" outcome="anadirTemaPage"/><br/>
+		<h:link value="#{msgs.irEliminarTema}" outcome="eliminarTemaPage"/><br/>
 		<br/>
 	<h:form>
 		<h:commandLink action="#{i18n.change('es')}" value="Español" /> | 
@@ -21,4 +23,5 @@
 	</h:form>
 		
 </h:body>
+</f:view>
 </html>

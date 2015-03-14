@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{msgs.language}"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
+<f:view locale="#{i18n.locale}">
 <h:head>
-<title>Añadir Tema</title>
+<title>#{msgs.anadirTemaTitulo}</title>
 <script type="text/javascript">
 	function load(){
 		if("#{anadirTemaBean.error}" === "true"){
-			alert("Se ha producido un error al insertar. El tema con ese id ya existe en base de datos.");
+			alert("#{msgs.errorinsertarbd}");
 		}
 	}
 </script>
 </h:head>
 <h:body onload="load()">
-	<h2>Añadir tema</h2>
+	<h2>#{msgs.anadirTemaTitulo}</h2>
 
 	<h:form>
 		<label for="id">Id del tema: </label> 
@@ -29,6 +31,7 @@
 	<br />
 	<br />
 
-	<h:link value="Volver a home" outcome="homePage"/>
+	<h:link value="#{msgs.volverIndice}" outcome="homePage"/>
 </h:body>
+</f:view>
 </html>
