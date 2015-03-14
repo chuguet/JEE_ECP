@@ -1,7 +1,5 @@
 package es.upm.miw.jeeecp.controllers.ejb;
 
-import java.util.List;
-
 import es.upm.miw.jeeecp.controllers.EliminarTemaController;
 import es.upm.miw.jeeecp.models.daos.DAOFactory;
 import es.upm.miw.jeeecp.models.daos.TemaDAO;
@@ -15,13 +13,6 @@ public class EliminarTemaEJBController implements EliminarTemaController {
         DAOFactory.setFactory(new DAOJpaFactory());
         TemaDAO dao = DAOFactory.getFactory().getTemaDAO();
         dao.deleteById(temaEntity.getId());
-    }
-
-    @Override
-    public List<TemaEntity> recuperaTemas() {
-        DAOFactory.setFactory(new DAOJpaFactory());
-        TemaDAO dao = DAOFactory.getFactory().getTemaDAO();
-        return dao.findAll();
     }
 
 }

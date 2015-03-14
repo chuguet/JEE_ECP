@@ -3,6 +3,7 @@ package es.upm.miw.jeeecp.views.web.beans;
 import java.util.List;
 
 import es.upm.miw.jeeecp.controllers.EliminarTemaController;
+import es.upm.miw.jeeecp.controllers.VotarController;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 
 public class EliminarTemaBean extends ViewBean {
@@ -51,11 +52,12 @@ public class EliminarTemaBean extends ViewBean {
     public void process() {
         EliminarTemaController eliminarTemaController = this.getControllerFactory()
                 .getEliminarTemaController();
+        VotarController votarController = this.getControllerFactory().getVotarController();
         if (this.autorizacion.equals(CLAVE)) {
             if (this.getTema().getId() != null) {
                 eliminarTemaController.eliminarTema(this.getTema());
             }
-            this.setTemas(eliminarTemaController.recuperaTemas());
+            this.setTemas(votarController.recuperaTemas());
             this.setTema(new TemaEntity());
         }
     }
