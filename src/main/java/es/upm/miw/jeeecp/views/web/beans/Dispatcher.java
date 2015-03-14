@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import es.upm.miw.jeeecp.controllers.ControllerFactory;
 import es.upm.miw.jeeecp.controllers.ejb.ControllerEJBFactory;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
+import es.upm.miw.jeeecp.models.entities.VotoEntity;
+import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
 @WebServlet("/jsp/*")
 public class Dispatcher extends HttpServlet {
@@ -39,16 +41,23 @@ public class Dispatcher extends HttpServlet {
         String view;
         switch (action) {
         case "votar":
-            /*
-             * PersonaView personaView = new PersonaView();
-             * personaView.setPersona(new Persona());
-             * request.setAttribute(action, personaView);
-             */
+            VotarBean votarBean = new VotarBean();
+            if (request.getParameter("id") != null) {
+                votarBean.setTema(new TemaEntity(Integer.parseInt(request.getParameter("id"))));
+            } else {
+                votarBean.setTema(new TemaEntity());
+            }
+            votarBean.setVoto(new VotoEntity());
+            votarBean.setTemas(new ArrayList<TemaEntity>());
+            votarBean.setControllerFactory(this.controllerFactory);
+            votarBean.process();
+            request.setAttribute(action + BEAN, votarBean);
             view = action;
             break;
         case "anadirTema":
             AnadirTemaBean anadirTemaBean = new AnadirTemaBean();
             anadirTemaBean.setTema(new TemaEntity());
+            anadirTemaBean.setControllerFactory(this.controllerFactory);
             request.setAttribute(action + BEAN, anadirTemaBean);
             view = action;
             break;
@@ -82,14 +91,29 @@ public class Dispatcher extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getPathInfo().substring(1);
         TemaEntity tema;
+        VotoEntity voto;
         String view;
         switch (action) {
         case "votar":
-            /*
-             * PersonaView personaView = new PersonaView();
-             * personaView.setPersona(new Persona());
-             * request.setAttribute(action, personaView);
-             */
+            if (request.getParameter("id") != null) {
+                tema = new TemaEntity(Integer.parseInt(request.getParameter("id")));
+                voto = new VotoEntity();
+            } else if (request.getParameter("valoracion") != null) {
+                tema = new TemaEntity(Integer.parseInt(request.getParameter("idTema")));
+                voto = new VotoEntity(Integer.parseInt(request.getParameter("valoracion")),
+                        request.getRemoteAddr(), NivelEstudios.valueOf(request
+                                .getParameter("nivel_estudios")));
+            } else {
+                tema = new TemaEntity();
+                voto = new VotoEntity();
+            }
+            VotarBean votarBean = new VotarBean();
+            votarBean.setTema(tema);
+            votarBean.setVoto(voto);
+            votarBean.setTemas(new ArrayList<TemaEntity>());
+            votarBean.setControllerFactory(controllerFactory);
+            votarBean.process();
+            request.setAttribute(action + BEAN, votarBean);
             view = action;
             break;
         case "anadirTema":
@@ -130,5 +154,4 @@ public class Dispatcher extends HttpServlet {
         this.getServletContext().getRequestDispatcher(PATH_ROOT_VIEW + view + JSP)
                 .forward(request, response);
     }
-
 }
