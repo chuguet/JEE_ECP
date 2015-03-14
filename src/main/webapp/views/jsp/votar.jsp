@@ -5,10 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Votar</title>
+	<script type="text/javascript">
+		function change() {
+			var value = document.getElementById("valoracion").value
+			document.getElementById("valoracion_texto").innerHTML = "Puntuaci&oacute;n: " + value;
+		}
+		function load() {
+		    document.getElementById("valoracion").addEventListener('change', change);
+		}
+	</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Votar</title>
 </head>
-<body>
+<body onload=load()>
 	<c:set var="bean" scope="request" value="${votarBean}" />
 	<h2>Votar</h2>
 
@@ -28,13 +37,16 @@
 				<h5>Vote para el siguiente tema: ${bean.tema.nombre}</h5>
 				<form method="POST" action="">
 					<input type="hidden" name="idTema" value="${bean.tema.id}"/>
-					<label for="">${bean.tema.pregunta}</label><br/>
-					<input type="range" id="valoracion" name="valoracion" value="0" min="0" max="10"><br/>
-					<select name="nivel_estudios">
+					<p>Pregunta: ${bean.tema.pregunta}</p><br/>
+					<label for="valoracion">Elija la valoracion: </label>
+					<input type="range" id="valoracion" name="valoracion" value="0" min="0" max="10"> <span id="valoracion_texto">Puntuaci&oacute;n: 0</span><br/>
+					<label for="nivel_estudios">Elija el nivel de estudios: </label>
+					<select id="nivel_estudios" name="nivel_estudios">
 						<option value="LICENCIADO">Licenciado</option>
 						<option value="DIPLOMADO">Diplomado</option>
 						<option value="BACHILLERATO">Bachillerato</option>
 					</select>
+					<br/>
 					<input type="submit" value="Votar" />
 				</form>
 			</c:otherwise>
