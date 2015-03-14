@@ -10,9 +10,9 @@
 
 	<h2>Seleccione una &oacute;pcion</h2>
 		<a href="/JEE_ECP/jsp/votar">Ir a votar</a><br/>
-		<a href="/JEE_ECP/jsp/vervotaciones">Ir a ver votaciones</a><br/>
-		<a href="/JEE_ECP/jsp/anadirtema">Ir a a&ntilde;adir tema</a><br/>
-		<a href="/JEE_ECP/jsp/eliminartema">Ir a eliminar tema</a>
+		<a href="/JEE_ECP/jsp/verVotaciones">Ir a ver votaciones</a><br/>
+		<a href="/JEE_ECP/jsp/anadirTema">Ir a a&ntilde;adir tema</a><br/>
+		<a href="/JEE_ECP/jsp/eliminarTema">Ir a eliminar tema</a>
 		
 </body>
 </html>

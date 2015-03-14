@@ -6,13 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>A&ntilde;adir Tema</title>
 </head>
 <body>
 	<c:set var="tView" scope="request" value="${anadirTemaBean}" />
 	<h2>A&ntilde;adir tema</h2>
 
-	<form action="/JEE_ECP/jsp/anadirtema" method="POST">
+	<form action="/JEE_ECP/jsp/anadirTema" method="POST">
+		<label for="id">Id del tema: </label>
+		<input id="id" name="id" type="text" value="${tView.tema.id}"/><br/>
 		<label for="nombre">Nombre del tema: </label>
 		<input id="nombre" name="nombre" type="text" value="${tView.tema.nombre}"/><br/>
 		<label for="pregunta">Pregunta del tema: </label>
