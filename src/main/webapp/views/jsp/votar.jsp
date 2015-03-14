@@ -29,7 +29,7 @@
 			<form method="POST" action="/JEE_ECP/jsp/votar">
 				<c:forEach items="${bean.temas}" var="tema">
 					<input type="radio" name="id" value="${tema.id}" />${tema.nombre}
-							<br />
+					<br />
 				</c:forEach>
 				<br /> <input type="submit" value="Seleccionar" />
 			</form>
@@ -38,16 +38,18 @@
 			<h5>Vote para el siguiente tema: ${bean.tema.nombre}</h5>
 			<form method="POST" action="/JEE_ECP/jsp/votar">
 				<input type="hidden" name="id" value="${bean.tema.id}" />
-				<p>Pregunta: ${bean.tema.pregunta}</p>
-				<br /> <label for="valoracion">Elija la valoracion: </label> <input
-					type="range" id="valoracion" name="valoracion" value="0" min="0"
-					max="10"><span id="valoracion_texto">Puntuaci&oacute;n:
-					0</span><br /> <label for="nivel_estudios">Elija el nivel de
-					estudios: </label> <select id="nivel_estudios" name="nivel_estudios">
+				<p>Pregunta: ${bean.tema.pregunta}</p><br />
+				<label for="valoracion">Elija la valoracion: </label>
+				<input type="range" id="valoracion" name="valoracion" value="0" min="0" max="10">
+				<span id="valoracion_texto">Puntuaci&oacute;n: 0</span><br />
+				<label for="nivel_estudios">Elija el nivel de estudios: </label>
+				<select id="nivel_estudios" name="nivel_estudios">
 					<option value="LICENCIADO">Licenciado</option>
 					<option value="DIPLOMADO">Diplomado</option>
 					<option value="BACHILLERATO">Bachillerato</option>
-				</select> <br /> <input type="submit" value="Votar" />
+				</select> 
+				<br /> 
+				<input type="submit" value="Votar" />
 			</form>
 		</c:otherwise>
 	</c:choose>

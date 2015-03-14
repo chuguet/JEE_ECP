@@ -20,12 +20,12 @@
 	<h2>A&ntilde;adir tema</h2>
 
 	<form method="POST" action="/JEE_ECP/jsp/anadirTema">
-		<label for="id">Id del tema: </label> <input id="id" name="id"
-			type="text" value="${bean.tema.id}" /><br /> <label for="nombre">Nombre
-			del tema: </label> <input id="nombre" name="nombre" type="text"
-			value="${bean.tema.nombre}" /><br /> <label for="pregunta">Pregunta
-			del tema: </label> <input id="pregunta" name="pregunta" type="text"
-			value="${bean.tema.pregunta}" /><br />
+		<label for="id">Id del tema: </label> 
+		<input id="id" name="id" type="text" value="${bean.tema.id}" /><br /> 
+		<label for="nombre">Nombre del tema: </label>
+		<input id="nombre" name="nombre" type="text" value="${bean.tema.nombre}" /><br />
+		<label for="pregunta">Pregunta del tema: </label>
+		<input id="pregunta" name="pregunta" type="text" value="${bean.tema.pregunta}" /><br />
 		<br /> <input type=submit value="A&ntilde;adir tema" />
 	</form>
 
