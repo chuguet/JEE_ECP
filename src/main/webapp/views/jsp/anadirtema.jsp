@@ -9,14 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:set var="tView" scope="request" value="${tema}" />
+	<c:set var="tView" scope="request" value="${anadirTemaBean}" />
 	<h2>A&ntilde;adir tema</h2>
 
 	<form action="/JEE_ECP/jsp/anadirtema" method="POST">
 		<label for="nombre">Nombre del tema: </label>
 		<input id="nombre" name="nombre" type="text" value="${tView.tema.nombre}"/><br/>
 		<label for="pregunta">Pregunta del tema: </label>
-		<input id="pregunta" name="pregunta" type="text" value="${tView.tema.nombre}"/><br/><br/>
+		<input id="pregunta" name="pregunta" type="text" value="${tView.tema.pregunta}"/><br/><br/>
 		<input type=submit value="A&ntilde;adir tema"/>
 	</form>
 	

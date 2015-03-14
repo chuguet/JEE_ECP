@@ -42,10 +42,9 @@ public class Dispatcher extends HttpServlet {
 			view = action;
 			break;
 		case "anadirtema":
-			/*
-			 * RolView rolView = new RolView(); request.setAttribute(action,
-			 * rolView);
-			 */
+			AnadirTemaBean anadirTemaBean = new AnadirTemaBean();
+			anadirTemaBean.setTema(new TemaEntity());
+			request.setAttribute("anadirTemaBean", anadirTemaBean);
 			view = action;
 			break;
 		case "eliminartema":
@@ -93,6 +92,7 @@ public class Dispatcher extends HttpServlet {
 			TemaEntity temaEntity = new TemaEntity(1, request.getParameter("nombre"), request.getParameter("pregunta"), null);
 			AnadirTemaBean anadirTemaBean = new AnadirTemaBean(temaEntity);
 			anadirTemaBean.setControllerFactory(controllerFactory);
+            request.setAttribute("anadirTemaBean", anadirTemaBean);
 			anadirTemaBean.process();
 			view = action;
 			break;

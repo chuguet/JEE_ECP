@@ -14,6 +14,14 @@ public class AnadirTemaBean extends ViewBean {
 		this.tema = tema;
 	}
 
+	public TemaEntity getTema() {
+		return tema;
+	}
+
+	public void setTema(TemaEntity tema) {
+		this.tema = tema;
+	}
+
 	public void process(){
 		AnadirTemaController anadirTemaController = this.getControllerFactory().getAnadirTemaController();
 		anadirTemaController.anadirTema(this.tema);

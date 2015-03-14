@@ -23,7 +23,8 @@ public class TemaEntity {
 	private List<VotoEntity> votos;
 
 	public TemaEntity() {
-
+		this.nombre="algo";
+		this.pregunta="otra";
 	}
 
 	public TemaEntity(Integer id, String nombre, String pregunta,
