@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{msgs.language}"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Eliminar Tema</title>
-</head>
-<body>
-	<h2>Eliminar tema</h2>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view locale="#{i18n.locale}">
+<h:head>
+<title>#{msgs.borrarTema}</title>
+</h:head>
+<h:body>
+	<h2>#{msgs.borrarTema}</h2>
 
-		<c:choose>
-			<c:when test="${bean.autorizacion==666}">
-				<h5>Seleccione el tema que desea borrar:</h5>
-			    <form method="POST" action="/JEE_ECP/jsp/eliminarTema">
-					<input type="hidden" name="autorizacion" value="${bean.autorizacion}"/>
-					<c:forEach items="${bean.temas}" var="tema">
-							<input type="radio" name="id" value="${tema.id}"/>${tema.nombre}
-							<br/>
-					</c:forEach>
+			<ui:fragment rendered="#{eliminarTemaBean.autorizacion==666}">
+				<h5>#{msgs.seleccionarTemaBorrar}</h5>
+			    <h:form>
+					<h:inputHidden value="#{eliminarTemaBean.autorizacion}"/>
+					<h:selectOneRadio value="#{user.favColor3}">
+			   			<f:selectItems value="#{eliminarTemaBean.temas}" var="tema" itemLabel="#{tema.nombre}" itemValue="#{tema.id}" />
+			   		</h:selectOneRadio>
 					<br/>
-					<input type="submit" value="Borrar" />
-				</form>
-			</c:when>
-			<c:otherwise>
-				<form method="POST" action="/JEE_ECP/jsp/eliminarTema">
-					<label for="autorizacion">C&oacute;digo de autorizaci&oacute;n</label>
-					<input id="autorizacion" name="autorizacion" type="text" value="${bean.autorizacion}"/> <br/>
-					<input type="submit" value="Enviar"/>
-				</form>
-			</c:otherwise>
-		</c:choose>
+					<h:commandButton value="#{msgs.borrar}" type="submit" action="#{eliminarTemaBean.process}" />
+				</h:form>
+			</ui:fragment>
+			<ui:fragment rendered="#{eliminarTemaBean.autorizacion!=666}">
+				<h:form>
+					<label for="autorizacion">#{msgs.codigoAutorizacion}</label>
+					<h:inputText id="autorizacion" value="#{eliminarTemaBean.autorizacion}"/> <br/>
+					<h:commandButton value="#{msgs.enviar}" type="submit" action="#{eliminarTemaBean.process}" />
+				</h:form>
+			</ui:fragment>
 		
 		<br/><br/>
-		<a href="/JEE_ECP/jsp/home">Volver a home</a>
-</body>
+		<h:link value="#{msgs.volverIndice}" outcome="homePage"/>
+</h:body>
+</f:view>
 </html>

@@ -1,11 +1,15 @@
 package es.upm.miw.jeeecp.views.web.beans;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.bean.ManagedBean;
 
 import es.upm.miw.jeeecp.controllers.EliminarTemaController;
 import es.upm.miw.jeeecp.controllers.VotarController;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 
+@ManagedBean
 public class EliminarTemaBean extends ViewBean {
 
     private static final String CLAVE = "666";
@@ -17,6 +21,8 @@ public class EliminarTemaBean extends ViewBean {
     private List<TemaEntity> temas;
 
     public EliminarTemaBean() {
+        this.tema = new TemaEntity();
+        this.temas = new ArrayList<TemaEntity>();
     }
 
     public EliminarTemaBean(String autorizacion, TemaEntity tema, List<TemaEntity> temas) {
@@ -49,7 +55,7 @@ public class EliminarTemaBean extends ViewBean {
         this.temas = temas;
     }
 
-    public void process() {
+    public String process() {
         EliminarTemaController eliminarTemaController = this.getControllerFactory()
                 .getEliminarTemaController();
         VotarController votarController = this.getControllerFactory().getVotarController();
@@ -60,6 +66,7 @@ public class EliminarTemaBean extends ViewBean {
             this.setTemas(votarController.recuperaTemas());
             this.setTema(new TemaEntity());
         }
+        return null;
     }
 
 }
