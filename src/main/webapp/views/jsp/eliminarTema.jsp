@@ -9,15 +9,15 @@
 <title>Eliminar Tema</title>
 </head>
 <body>
-	<c:set var="tView" scope="request" value="${eliminarTemaBean}" />
+	<c:set var="bean" scope="request" value="${eliminarTemaBean}" />
 	<h2>Eliminar tema</h2>
 
 		<c:choose>
-			<c:when test="${eliminarTemaBean.autorizacion==666}">
+			<c:when test="${bean.autorizacion==666}">
 				<h5>Seleccione el tema que desea borrar:</h5>
 			    <form method="POST" action="/JEE_ECP/jsp/eliminarTema">
-					<input type="hidden" name="autorizacion" value="${eliminarTemaBean.autorizacion}"/>
-					<c:forEach items="${eliminarTemaBean.temas}" var="tema">
+					<input type="hidden" name="autorizacion" value="${bean.autorizacion}"/>
+					<c:forEach items="${bean.temas}" var="tema">
 							<input type="radio" name="id" value="${tema.id}"/>${tema.nombre}
 							<br/>
 					</c:forEach>
@@ -28,7 +28,7 @@
 			<c:otherwise>
 				<form method="POST" action="/JEE_ECP/jsp/eliminarTema">
 					<label for="autorizacion">C&oacute;digo de autorizaci&oacute;n</label>
-					<input id="autorizacion" name="autorizacion" type="text" value="${eliminarTemaBean.autorizacion}"/> <br/>
+					<input id="autorizacion" name="autorizacion" type="text" value="${bean.autorizacion}"/> <br/>
 					<input type="submit" value="Enviar"/>
 				</form>
 			</c:otherwise>
