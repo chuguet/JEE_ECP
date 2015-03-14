@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"        
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<title>JSF 2.0</title>
+<title>Añadir Tema</title>
+<script type="text/javascript">
+	function load(){
+		if("#{anadirTemaBean.error}" === "true"){
+			alert("Se ha producido un error al insertar. El tema con ese id ya existe en base de datos.");
+		}
+	}
+</script>
 </h:head>
-<h:body>
-	<h3>Anadir tema</h3>
+<h:body onload="load()">
+	<h2>Añadir tema</h2>
+
+	<h:form>
+		<label for="id">Id del tema: </label> 
+		<h:inputText id="id" value="#{anadirTemaBean.tema.id}" /><br /> 
+		<label for="nombre">Nombre del tema: </label>
+		<h:inputText id="nombre" value="#{anadirTemaBean.tema.nombre}" /><br />
+		<label for="pregunta">Pregunta del tema: </label>
+		<h:inputText id="pregunta" value="#{anadirTemaBean.tema.pregunta}" /><br />
+		<h:commandButton value="Añadir tema" type="submit" action="#{anadirTemaBean.process}" />
+	</h:form>
+
+	<br />
+	<br />
+
+	<h:link value="Volver a home" outcome="homePage"/>
 </h:body>
 </html>

@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14263270051650" configfile="/JEE_ECP/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="jsf/navigator.xhtml" x="122" y="466" id="pf14263273283341" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" outlinks="pf14263273283342 pf14263273283343 pf14263273283344 pf14263273283345 pf14263273283346" inlinks="pf14263273283346" path="/jsf/home.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="jsf/rule1Page.xhtml" x="338" y="178" id="pf14263273283347" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf14263273283342 pf14263273283344" path="/jsf/rule1Page.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="jsf/rule2Page.xhtml" x="338" y="562" id="pf14263273283348" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf14263273283343" path="/jsf/rule2Page.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="jsf/staticPage.xhtml" x="338" y="946" id="pf14263273283359" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf14263273283345" path="/jsf/staticPage.xhtml"/>
-  <links id="pf14263273283342" target="pf14263273283347" source="pf14263273283341" outcome="rule1"/>
-  <links id="pf14263273283343" target="pf14263273283348" source="pf14263273283341" outcome="rule2"/>
-  <links id="pf14263273283344" target="pf14263273283347" source="pf14263273283341" outcome="rule2"/>
-  <links id="pf14263273283345" target="pf14263273283359" source="pf14263273283341" outcome="staticPage"/>
-  <links id="pf14263273283346" target="pf14263273283341" source="pf14263273283341">
-    <bendPoints d1Height="-36" d2Height="-36"/>
-    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
-    <bendPoints d1Width="-64" d2Width="-64"/>
-  </links>
+  <nodes xsi:type="pageflow:PFPage" name="jsf/home.xhtml" id="pf14263576104373" referenceLink="//@navigationRule.4/@navigationCase.1/@toViewId|" outlinks="pf142635885878213 pf142635885878214 pf142635885878215 pf142635885878216 pf142635885878217" inlinks="pf142635885878217 pf142635885878218 pf142635885878219 pf142635938095424 pf142635938095425 pf142635938095426 pf142635938095427 pf142635938095428 pf142635938095429" path="/views/jsf/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="views/jsf/votar.xhtml" id="pf142635885878220" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf142635938095426 pf142635938095427" inlinks="pf142635885878213" path="/views/jsf/votar.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="views/jsf/verVotaciones.xhtml" id="pf142635885878221" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf142635938095428 pf142635938095429" inlinks="pf142635885878214" path="/views/jsf/verVotaciones.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="views/jsf/anadirTema.xhtml" id="pf142635885878222" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf142635885878218 pf142635885878219" inlinks="pf142635885878215" path="/views/jsf/anadirTema.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="views/jsf/eliminarTema.xhtml" id="pf142635885878223" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf142635938095424 pf142635938095425" inlinks="pf142635885878216" path="/views/jsf/eliminarTema.xhtml"/>
+  <links id="pf142635885878213" target="pf142635885878220" source="pf14263576104373" outcome="votarPage"/>
+  <links id="pf142635885878214" target="pf142635885878221" source="pf14263576104373" outcome="verVotacionesPage"/>
+  <links id="pf142635885878215" target="pf142635885878222" source="pf14263576104373" outcome="anadirTemaPage"/>
+  <links id="pf142635885878216" target="pf142635885878223" source="pf14263576104373" outcome="eliminarTemaPage"/>
+  <links id="pf142635885878217" target="pf14263576104373" source="pf14263576104373"/>
+  <links id="pf142635885878218" target="pf14263576104373" source="pf142635885878222" outcome="homePage"/>
+  <links id="pf142635885878219" target="pf14263576104373" source="pf142635885878222"/>
+  <links id="pf142635938095424" target="pf14263576104373" source="pf142635885878223" outcome="homePage"/>
+  <links id="pf142635938095425" target="pf14263576104373" source="pf142635885878223"/>
+  <links id="pf142635938095426" target="pf14263576104373" source="pf142635885878220" outcome="homePage"/>
+  <links id="pf142635938095427" target="pf14263576104373" source="pf142635885878220"/>
+  <links id="pf142635938095428" target="pf14263576104373" source="pf142635885878221" outcome="homePage"/>
+  <links id="pf142635938095429" target="pf14263576104373" source="pf142635885878221"/>
 </pageflow:Pageflow>

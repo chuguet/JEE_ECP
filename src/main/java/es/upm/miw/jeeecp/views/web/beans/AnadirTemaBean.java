@@ -1,8 +1,11 @@
 package es.upm.miw.jeeecp.views.web.beans;
 
+import javax.faces.bean.ManagedBean;
+
 import es.upm.miw.jeeecp.controllers.AnadirTemaController;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 
+@ManagedBean
 public class AnadirTemaBean extends ViewBean {
 
     private boolean error;
@@ -10,6 +13,8 @@ public class AnadirTemaBean extends ViewBean {
     private TemaEntity tema;
 
     public AnadirTemaBean() {
+        this.error = false;
+        this.tema = new TemaEntity();
     }
 
     public AnadirTemaBean(TemaEntity tema) {
@@ -24,7 +29,7 @@ public class AnadirTemaBean extends ViewBean {
         this.tema = tema;
     }
 
-    public void process() {
+    public String process() {
         AnadirTemaController anadirTemaController = this.getControllerFactory()
                 .getAnadirTemaController();
         Boolean existeTema = anadirTemaController.existeTema(this.getTema());
@@ -35,6 +40,7 @@ public class AnadirTemaBean extends ViewBean {
         } else {
             this.setError(true);
         }
+        return null;
     }
 
     public boolean isError() {
