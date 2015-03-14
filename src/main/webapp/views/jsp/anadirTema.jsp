@@ -26,7 +26,7 @@
 		<input id="nombre" name="nombre" type="text" value="${bean.tema.nombre}" /><br />
 		<label for="pregunta">Pregunta del tema: </label>
 		<input id="pregunta" name="pregunta" type="text" value="${bean.tema.pregunta}" /><br />
-		<br /> <input type=submit value="A&ntilde;adir tema" />
+		<br /> <input type="submit" value="A&ntilde;adir tema" />
 	</form>
 
 	<br />
