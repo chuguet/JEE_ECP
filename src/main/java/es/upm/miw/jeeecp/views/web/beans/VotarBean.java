@@ -1,5 +1,5 @@
 package es.upm.miw.jeeecp.views.web.beans;
 
-public class VotarBean {
+public class VotarBean extends ViewBean {
 
 }

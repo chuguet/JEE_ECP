@@ -7,12 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h2>Ver Votaciones</h2>
 
-	<h2>Seleccione una &oacute;pcion</h2>
-		<a href="/JEE_ECP/dispatcher/votar">Ir a votar</a><br/>
-		<a href="/JEE_ECP/dispatcher/vervotaciones">Ir a ver votaciones</a><br/>
-		<a href="/JEE_ECP/dispatcher/anadirtema">Ir a a&ntilde;adir tema</a><br/>
-		<a href="/JEE_ECP/dispatcher/eliminartema">Ir a eliminar tema</a>
-		
+		<a href="/JEE_ECP/jsp/home">Volver a home</a>
 </body>
 </html>

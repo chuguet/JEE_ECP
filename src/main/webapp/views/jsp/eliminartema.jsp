@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Votar</h2>
+	<h2>Eliminar tema</h2>
 
-		<a href="/JEE_ECP/dispatcher/home">Volver a home</a>
+		<a href="/JEE_ECP/jsp/home">Volver a home</a>
 </body>
 </html>

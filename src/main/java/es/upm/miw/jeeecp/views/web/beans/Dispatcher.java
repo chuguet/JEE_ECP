@@ -8,13 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/dispatcher/*")
+import es.upm.miw.jeeecp.controllers.ControllerFactory;
+import es.upm.miw.jeeecp.controllers.ejb.ControllerEJBFactory;
+import es.upm.miw.jeeecp.models.entities.TemaEntity;
+
+@WebServlet("/jsp/*")
 public class Dispatcher extends HttpServlet {
 
 	private static final long serialVersionUID = -8237077722948003615L;
 
-	private static String PATH_ROOT_VIEW = "/jsp/";
+	private static String PATH_ROOT_VIEW = "/views/jsp/";
 
+	private ControllerFactory controllerFactory;
+	
+	@Override
+	public void init(){
+		controllerFactory = new ControllerEJBFactory();
+	}
+	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -79,12 +90,10 @@ public class Dispatcher extends HttpServlet {
 			view = action;
 			break;
 		case "anadirtema":
-			System.out.println(request.getParameter("nombre"));
-			System.out.println(request.getParameter("pregunta"));
-			/*
-			 * RolView rolView = new RolView(); request.setAttribute(action,
-			 * rolView);
-			 */
+			TemaEntity temaEntity = new TemaEntity(1, request.getParameter("nombre"), request.getParameter("pregunta"), null);
+			AnadirTemaBean anadirTemaBean = new AnadirTemaBean(temaEntity);
+			anadirTemaBean.setControllerFactory(controllerFactory);
+			anadirTemaBean.process();
 			view = action;
 			break;
 		case "eliminartema":
