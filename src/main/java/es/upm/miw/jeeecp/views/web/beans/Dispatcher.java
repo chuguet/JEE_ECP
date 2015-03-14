@@ -15,108 +15,111 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 @WebServlet("/jsp/*")
 public class Dispatcher extends HttpServlet {
 
-	private static final long serialVersionUID = -8237077722948003615L;
+    private static final String BEAN = "Bean";
 
-	private static String PATH_ROOT_VIEW = "/views/jsp/";
+    private static final String JSP = ".jsp";
 
-	private ControllerFactory controllerFactory;
-	
-	@Override
-	public void init(){
-		controllerFactory = new ControllerEJBFactory();
-	}
-	
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String action = request.getPathInfo().substring(1);
+    private static final long serialVersionUID = -8237077722948003615L;
 
-		String view;
-		switch (action) {
-		case "votar":
-			/*
-			 * PersonaView personaView = new PersonaView();
-			 * personaView.setPersona(new Persona());
-			 * request.setAttribute(action, personaView);
-			 */
-			view = action;
-			break;
-		case "anadirtema":
-			AnadirTemaBean anadirTemaBean = new AnadirTemaBean();
-			anadirTemaBean.setTema(new TemaEntity());
-			request.setAttribute("anadirTemaBean", anadirTemaBean);
-			view = action;
-			break;
-		case "eliminartema":
-			/*
-			 * RolView rolView = new RolView(); request.setAttribute(action,
-			 * rolView);
-			 */
-			view = action;
-			break;
-		case "vervotaciones":
-			/*
-			 * RolView rolView = new RolView(); hecho en el @init el
-			 * controllerejb porque el managedbean no nfuncionaara cuando no
-			 * estemos en jsf y tendremos que inyectarlo desde aquí con un new
-			 * rolView.setControllerFactory(controllerEJB);
-			 * request.setAttribute(action, rolView);
-			 */
-			view = action;
-			break;
-		default:
-			view = "home";
-		}
+    private static String PATH_ROOT_VIEW = "/views/jsp/";
 
-		this.getServletContext()
-				.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
-				.forward(request, response);
-	}
+    private ControllerFactory controllerFactory;
 
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String action = request.getPathInfo().substring(1);
+    @Override
+    public void init() {
+        controllerFactory = new ControllerEJBFactory();
+    }
 
-		String view;
-		switch (action) {
-		case "votar":
-			/*
-			 * PersonaView personaView = new PersonaView();
-			 * personaView.setPersona(new Persona());
-			 * request.setAttribute(action, personaView);
-			 */
-			view = action;
-			break;
-		case "anadirtema":
-			TemaEntity temaEntity = new TemaEntity(1, request.getParameter("nombre"), request.getParameter("pregunta"), null);
-			AnadirTemaBean anadirTemaBean = new AnadirTemaBean(temaEntity);
-			anadirTemaBean.setControllerFactory(controllerFactory);
-            request.setAttribute("anadirTemaBean", anadirTemaBean);
-			anadirTemaBean.process();
-			view = action;
-			break;
-		case "eliminartema":
-			/*
-			 * RolView rolView = new RolView(); request.setAttribute(action,
-			 * rolView);
-			 */
-			view = action;
-			break;
-		case "vervotaciones":
-			/*
-			 * RolView rolView = new RolView(); request.setAttribute(action,
-			 * rolView);
-			 */
-			view = action;
-			break;
-		default:
-			view = "home";
-		}
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getPathInfo().substring(1);
 
-		this.getServletContext()
-				.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
-				.forward(request, response);
-	}
+        String view;
+        switch (action) {
+        case "votar":
+            /*
+             * PersonaView personaView = new PersonaView();
+             * personaView.setPersona(new Persona());
+             * request.setAttribute(action, personaView);
+             */
+            view = action;
+            break;
+        case "anadirTema":
+            AnadirTemaBean anadirTemaBean = new AnadirTemaBean();
+            anadirTemaBean.setTema(new TemaEntity());
+            request.setAttribute(action + BEAN, anadirTemaBean);
+            view = action;
+            break;
+        case "eliminarTema":
+            /*
+             * RolView rolView = new RolView(); request.setAttribute(action,
+             * rolView);
+             */
+            view = action;
+            break;
+        case "verVotaciones":
+            /*
+             * RolView rolView = new RolView(); hecho en el @init el
+             * controllerejb porque el managedbean no nfuncionaara cuando no
+             * estemos en jsf y tendremos que inyectarlo desde aquí con un new
+             * rolView.setControllerFactory(controllerEJB);
+             * request.setAttribute(action, rolView);
+             */
+            view = action;
+            break;
+        default:
+            view = "home";
+        }
+
+        this.getServletContext().getRequestDispatcher(PATH_ROOT_VIEW + view + JSP)
+                .forward(request, response);
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getPathInfo().substring(1);
+
+        String view;
+        switch (action) {
+        case "votar":
+            /*
+             * PersonaView personaView = new PersonaView();
+             * personaView.setPersona(new Persona());
+             * request.setAttribute(action, personaView);
+             */
+            view = action;
+            break;
+        case "anadirTema":
+            TemaEntity temaEntity = new TemaEntity(Integer.parseInt(request.getParameter("id")),
+                    request.getParameter("nombre"), request.getParameter("pregunta"));
+            AnadirTemaBean anadirTemaBean = new AnadirTemaBean(temaEntity);
+            anadirTemaBean.setControllerFactory(controllerFactory);
+            request.setAttribute(action + BEAN, anadirTemaBean);
+            anadirTemaBean.process();
+            view = action;
+            break;
+        case "eliminarTema":
+            /*
+             * RolView rolView = new RolView(); request.setAttribute(action,
+             * rolView);
+             */
+            view = action;
+            break;
+        case "verVotaciones":
+            /*
+             * RolView rolView = new RolView(); request.setAttribute(action,
+             * rolView);
+             */
+            view = action;
+            break;
+        default:
+            view = "home";
+        }
+
+        this.getServletContext().getRequestDispatcher(PATH_ROOT_VIEW + view + JSP)
+                .forward(request, response);
+    }
 
 }
