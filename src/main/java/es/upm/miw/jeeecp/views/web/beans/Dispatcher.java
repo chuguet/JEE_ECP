@@ -1,6 +1,7 @@
 package es.upm.miw.jeeecp.views.web.beans;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,10 +53,10 @@ public class Dispatcher extends HttpServlet {
             view = action;
             break;
         case "eliminarTema":
-            /*
-             * RolView rolView = new RolView(); request.setAttribute(action,
-             * rolView);
-             */
+            EliminarTemaBean eliminarTemaBean = new EliminarTemaBean(null, new TemaEntity(),
+                    new ArrayList<TemaEntity>());
+            eliminarTemaBean.setControllerFactory(this.controllerFactory);
+            request.setAttribute(action + BEAN, eliminarTemaBean);
             view = action;
             break;
         case "verVotaciones":
@@ -80,7 +81,7 @@ public class Dispatcher extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getPathInfo().substring(1);
-
+        TemaEntity tema;
         String view;
         switch (action) {
         case "votar":
@@ -92,19 +93,27 @@ public class Dispatcher extends HttpServlet {
             view = action;
             break;
         case "anadirTema":
-            TemaEntity temaEntity = new TemaEntity(Integer.parseInt(request.getParameter("id")),
+            tema = new TemaEntity(Integer.parseInt(request.getParameter("id")),
                     request.getParameter("nombre"), request.getParameter("pregunta"));
-            AnadirTemaBean anadirTemaBean = new AnadirTemaBean(temaEntity);
+            AnadirTemaBean anadirTemaBean = new AnadirTemaBean(tema);
             anadirTemaBean.setControllerFactory(controllerFactory);
-            request.setAttribute(action + BEAN, anadirTemaBean);
             anadirTemaBean.process();
+            request.setAttribute(action + BEAN, anadirTemaBean);
             view = action;
             break;
         case "eliminarTema":
-            /*
-             * RolView rolView = new RolView(); request.setAttribute(action,
-             * rolView);
-             */
+            String autorizacion = request.getParameter("autorizacion");
+
+            if (request.getParameter("id") != null) {
+                tema = new TemaEntity(Integer.parseInt(request.getParameter("id")));
+            } else {
+                tema = new TemaEntity();
+            }
+            EliminarTemaBean eliminarTemaBean = new EliminarTemaBean(autorizacion, tema,
+                    new ArrayList<TemaEntity>());
+            eliminarTemaBean.setControllerFactory(controllerFactory);
+            eliminarTemaBean.process();
+            request.setAttribute(action + BEAN, eliminarTemaBean);
             view = action;
             break;
         case "verVotaciones":

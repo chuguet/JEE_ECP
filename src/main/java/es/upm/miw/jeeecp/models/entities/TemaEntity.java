@@ -25,8 +25,12 @@ public class TemaEntity {
     public TemaEntity() {
     }
 
-    public TemaEntity(Integer id, String nombre, String pregunta) {
+    public TemaEntity(Integer id) {
         this.id = id;
+    }
+
+    public TemaEntity(Integer id, String nombre, String pregunta) {
+        this(id);
         this.nombre = nombre;
         this.pregunta = pregunta;
     }
