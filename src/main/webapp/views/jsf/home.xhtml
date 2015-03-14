@@ -4,16 +4,21 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-<title>Home JSF</title>
+<title>#{msgs.hometitle}</title>
 </h:head>
 <h:body>
 
-	<h2>Seleccione una ópcion</h2>
+	<h2>#{msgs.opcion}</h2>
 	
-		<h:link value="Ir a votar" outcome="votarPage"/><br/>
-		<h:link value="Ir a ver votaciones" outcome="verVotacionesPage"/><br/>
-		<h:link value="Ir a añadir tema" outcome="anadirTemaPage"/><br/>
-		<h:link value="Ir a eliminar tema" outcome="eliminarTemaPage"/>
+		<h:link value="#{msgs.irvotar}" outcome="votarPage"/><br/>
+		<h:link value="#{msgs.irvervotaciones}" outcome="verVotacionesPage"/><br/>
+		<h:link value="#{msgs.iranadirtema}" outcome="anadirTemaPage"/><br/>
+		<h:link value="#{msgs.ireliminartema}" outcome="eliminarTemaPage"/><br/>
+		<br/>
+	<h:form>
+		<h:commandLink action="#{i18n.change('es')}" value="Español" /> | 
+		<h:commandLink action="#{i18n.change('en')}" value="English" />
+	</h:form>
 		
 </h:body>
 </html>
