@@ -6,26 +6,26 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <f:view locale="#{i18n.locale}">
 <h:head>
-<title>#{msgs.anadirTemaTitulo}</title>
+<title>#{msgs.anadirTema}</title>
 <script type="text/javascript">
 	function load(){
 		if("#{anadirTemaBean.error}" === "true"){
-			alert("#{msgs.errorinsertarbd}");
+			alert("#{msgs.errorInsertarBd}");
 		}
 	}
 </script>
 </h:head>
 <h:body onload="load()">
-	<h2>#{msgs.anadirTemaTitulo}</h2>
+	<h2>#{msgs.anadirTema}</h2>
 
 	<h:form>
-		<label for="id">Id del tema: </label> 
+		<label for="id">#{msgs.idTema}</label> 
 		<h:inputText id="id" value="#{anadirTemaBean.tema.id}" /><br /> 
-		<label for="nombre">Nombre del tema: </label>
+		<label for="nombre">#{msgs.nombreTema}</label>
 		<h:inputText id="nombre" value="#{anadirTemaBean.tema.nombre}" /><br />
-		<label for="pregunta">Pregunta del tema: </label>
+		<label for="pregunta">#{msgs.preguntaTema}</label>
 		<h:inputText id="pregunta" value="#{anadirTemaBean.tema.pregunta}" /><br />
-		<h:commandButton value="Añadir tema" type="submit" action="#{anadirTemaBean.process}" />
+		<h:commandButton value="#{msgs.anadirTema}" type="submit" action="#{anadirTemaBean.process}" />
 	</h:form>
 
 	<br />
