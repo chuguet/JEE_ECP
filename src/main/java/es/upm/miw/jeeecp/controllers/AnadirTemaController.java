@@ -4,6 +4,8 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 
 public interface AnadirTemaController {
 
-	void anadirTema(TemaEntity temaEntity);
+    void anadirTema(TemaEntity temaEntity);
+
+    Boolean existeTema(TemaEntity temaEntity);
 
 }

@@ -8,11 +8,18 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 
 public class AnadirTemaEJBController implements AnadirTemaController {
 
-	@Override
-	public void anadirTema(TemaEntity temaEntity) {
-		DAOFactory.setFactory(new DAOJpaFactory());
-		TemaDAO dao = DAOFactory.getFactory().getTemaDAO();
-		dao.create(temaEntity);
-	}
+    @Override
+    public void anadirTema(TemaEntity temaEntity) {
+        DAOFactory.setFactory(new DAOJpaFactory());
+        TemaDAO dao = DAOFactory.getFactory().getTemaDAO();
+        dao.create(temaEntity);
+    }
+
+    @Override
+    public Boolean existeTema(TemaEntity temaEntity) {
+        DAOFactory.setFactory(new DAOJpaFactory());
+        TemaDAO dao = DAOFactory.getFactory().getTemaDAO();
+        return dao.read(temaEntity.getId()) != null;
+    }
 
 }

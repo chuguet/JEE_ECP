@@ -19,7 +19,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Votar</title>
 </head>
-<body onload=load()>
+<body onload="load()">
 	<c:set var="bean" scope="request" value="${votarBean}" />
 	<h2>Votar</h2>
 

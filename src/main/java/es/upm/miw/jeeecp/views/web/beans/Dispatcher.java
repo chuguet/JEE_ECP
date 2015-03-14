@@ -57,6 +57,7 @@ public class Dispatcher extends HttpServlet {
         case "anadirTema":
             AnadirTemaBean anadirTemaBean = new AnadirTemaBean();
             anadirTemaBean.setTema(new TemaEntity());
+            anadirTemaBean.setError(false);
             anadirTemaBean.setControllerFactory(this.controllerFactory);
             request.setAttribute(action + BEAN, anadirTemaBean);
             view = action;
@@ -120,6 +121,7 @@ public class Dispatcher extends HttpServlet {
             tema = new TemaEntity(Integer.parseInt(request.getParameter("id")),
                     request.getParameter("nombre"), request.getParameter("pregunta"));
             AnadirTemaBean anadirTemaBean = new AnadirTemaBean(tema);
+            anadirTemaBean.setError(false);
             anadirTemaBean.setControllerFactory(controllerFactory);
             anadirTemaBean.process();
             request.setAttribute(action + BEAN, anadirTemaBean);
