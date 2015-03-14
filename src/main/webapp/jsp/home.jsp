@@ -8,10 +8,10 @@
 </head>
 <body>
 
-	<h2>Seleccione una &oacute;pcione</h2>
+	<h2>Seleccione una &oacute;pcion</h2>
 		<a href="/JEE_ECP/dispatcher/votar">Ir a votar</a><br/>
 		<a href="/JEE_ECP/dispatcher/vervotaciones">Ir a ver votaciones</a><br/>
-		<a href="/JEE_ECP/dispatcher/anadirtema">Ir a a&ntilde;dir tema</a><br/>
+		<a href="/JEE_ECP/dispatcher/anadirtema">Ir a a&ntilde;adir tema</a><br/>
 		<a href="/JEE_ECP/dispatcher/eliminartema">Ir a eliminar tema</a>
 		
 </body>

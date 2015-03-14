@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Anadir tema</h2>
+	<h2>A&ntilde;adir tema</h2>
 
 		<a href="/JEE_ECP/dispatcher/home">Volver a home</a>
 </body>
