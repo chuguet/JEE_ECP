@@ -69,13 +69,12 @@ public class Dispatcher extends HttpServlet {
             view = action;
             break;
         case "verVotaciones":
-            /*
-             * RolView rolView = new RolView(); hecho en el @init el
-             * controllerejb porque el managedbean no nfuncionaara cuando no
-             * estemos en jsf y tendremos que inyectarlo desde aquí con un new
-             * rolView.setControllerFactory(controllerEJB);
-             * request.setAttribute(action, rolView);
-             */
+            VerVotacionesBean verVotacionesBean = new VerVotacionesBean();
+            verVotacionesBean.setTema(new TemaEntity());
+            verVotacionesBean.setTemas(new ArrayList<TemaEntity>());
+            verVotacionesBean.setControllerFactory(this.controllerFactory);
+            verVotacionesBean.process();
+            request.setAttribute(action + BEAN, verVotacionesBean);
             view = action;
             break;
         default:
@@ -90,6 +89,7 @@ public class Dispatcher extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getPathInfo().substring(1);
+        NivelEstudios nivelEstudios = null;
         TemaEntity tema;
         VotoEntity voto;
         String view;
@@ -141,10 +141,19 @@ public class Dispatcher extends HttpServlet {
             view = action;
             break;
         case "verVotaciones":
-            /*
-             * RolView rolView = new RolView(); request.setAttribute(action,
-             * rolView);
-             */
+            if (request.getParameter("nivel_estudios") != null) {
+                tema = new TemaEntity(Integer.parseInt(request.getParameter("id")));
+                nivelEstudios = NivelEstudios.valueOf(request.getParameter("nivel_estudios"));
+            } else {
+                tema = new TemaEntity(Integer.parseInt(request.getParameter("id")));
+            }
+            VerVotacionesBean verVotacionesBean = new VerVotacionesBean();
+            verVotacionesBean.setTema(tema);
+            verVotacionesBean.setNivelEstudios(nivelEstudios);
+            verVotacionesBean.setTemas(new ArrayList<TemaEntity>());
+            verVotacionesBean.setControllerFactory(controllerFactory);
+            verVotacionesBean.process();
+            request.setAttribute(action + BEAN, verVotacionesBean);
             view = action;
             break;
         default:

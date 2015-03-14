@@ -12,7 +12,7 @@
 	<c:set var="bean" scope="request" value="${anadirTemaBean}" />
 	<h2>A&ntilde;adir tema</h2>
 
-	<form action="/JEE_ECP/jsp/anadirTema" method="POST">
+	<form method="POST" action="/JEE_ECP/jsp/anadirTema">
 		<label for="id">Id del tema: </label>
 		<input id="id" name="id" type="text" value="${bean.tema.id}"/><br/>
 		<label for="nombre">Nombre del tema: </label>
