@@ -1,14 +1,21 @@
 package es.upm.miw.jeeecp.views.web.beans;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.bean.ManagedBean;
 
 import es.upm.miw.jeeecp.controllers.VotarController;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 import es.upm.miw.jeeecp.models.entities.VotoEntity;
 
+@ManagedBean
 public class VotarBean extends ViewBean {
 
     public VotarBean() {
+        this.voto = new VotoEntity();
+        this.tema = new TemaEntity();
+        this.temas = new ArrayList<TemaEntity>();
     }
 
     private VotoEntity voto;
@@ -25,7 +32,7 @@ public class VotarBean extends ViewBean {
         this.temas = temas;
     }
 
-    public void process() {
+    public String process() {
         VotarController votarController = this.getControllerFactory().getVotarController();
         if (voto.getValoracion() != null) {
             votarController.votar(this.getTema(), this.getVoto());
@@ -39,6 +46,7 @@ public class VotarBean extends ViewBean {
                 this.setTema(votarController.buscaTema(this.getTema().getId()));
             }
         }
+        return null;
     }
 
     public TemaEntity getTema() {

@@ -2,11 +2,14 @@ package es.upm.miw.jeeecp.views.web.beans;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import es.upm.miw.jeeecp.controllers.VerVotacionesController;
 import es.upm.miw.jeeecp.controllers.VotarController;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
+@ManagedBean
 public class VerVotacionesBean extends ViewBean {
 
     public VerVotacionesBean() {
@@ -62,7 +65,7 @@ public class VerVotacionesBean extends ViewBean {
         this.temas = temas;
     }
 
-    public void process() {
+    public String process() {
         VotarController votarController = this.getControllerFactory().getVotarController();
         VerVotacionesController verVotacionesController = this.getControllerFactory()
                 .getVerVotacionesController();
@@ -80,5 +83,6 @@ public class VerVotacionesBean extends ViewBean {
                     this.getTema(), this.getNivelEstudios()));
             this.setNivelEstudios(this.getNivelEstudios());
         }
+        return null;
     }
 }
