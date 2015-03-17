@@ -13,16 +13,13 @@ import es.upm.miw.jeeecp.models.entities.VotoEntity;
 public class VotarBean extends ViewBean {
 
     public VotarBean() {
-        this.voto = new VotoEntity();
-        this.tema = new TemaEntity();
-        this.temas = new ArrayList<TemaEntity>();
     }
 
-    private VotoEntity voto;
+    private VotoEntity voto = new VotoEntity();
 
-    private TemaEntity tema;
+    private TemaEntity tema = new TemaEntity();
 
-    private List<TemaEntity> temas;
+    private List<TemaEntity> temas = new ArrayList<TemaEntity>();
 
     public List<TemaEntity> getTemas() {
         return temas;

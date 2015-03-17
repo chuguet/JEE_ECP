@@ -1,5 +1,6 @@
 package es.upm.miw.jeeecp.views.web.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -15,9 +16,9 @@ public class VerVotacionesBean extends ViewBean {
     public VerVotacionesBean() {
     }
 
-    private List<TemaEntity> temas;
+    private List<TemaEntity> temas = new ArrayList<TemaEntity>();
 
-    private TemaEntity tema;
+    private TemaEntity tema = new TemaEntity();
 
     private NivelEstudios nivelEstudios;
 
