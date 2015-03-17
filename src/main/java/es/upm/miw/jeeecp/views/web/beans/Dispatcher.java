@@ -97,13 +97,15 @@ public class Dispatcher extends HttpServlet {
         switch (action) {
         case "votar":
             if (request.getParameter("id") != null) {
-                tema = new TemaEntity(Integer.parseInt(request.getParameter("id")));
-                voto = new VotoEntity();
-            } else if (request.getParameter("valoracion") != null) {
-                tema = new TemaEntity(Integer.parseInt(request.getParameter("idTema")));
-                voto = new VotoEntity(Integer.parseInt(request.getParameter("valoracion")),
-                        request.getRemoteAddr(), NivelEstudios.valueOf(request
-                                .getParameter("nivel_estudios")));
+                if (request.getParameter("valoracion") != null) {
+                    tema = new TemaEntity(Integer.parseInt(request.getParameter("id")));
+                    voto = new VotoEntity(Integer.parseInt(request.getParameter("valoracion")),
+                            request.getRemoteAddr(), NivelEstudios.valueOf(request
+                                    .getParameter("nivel_estudios")));
+                } else {
+                    tema = new TemaEntity(Integer.parseInt(request.getParameter("id")));
+                    voto = new VotoEntity();
+                }
             } else {
                 tema = new TemaEntity();
                 voto = new VotoEntity();
