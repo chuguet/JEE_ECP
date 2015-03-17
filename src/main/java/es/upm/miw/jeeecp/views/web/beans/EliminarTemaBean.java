@@ -16,13 +16,11 @@ public class EliminarTemaBean extends ViewBean {
 
     private String autorizacion;
 
-    private TemaEntity tema;
+    private TemaEntity tema = new TemaEntity();
 
-    private List<TemaEntity> temas;
+    private List<TemaEntity> temas = new ArrayList<TemaEntity>();
 
     public EliminarTemaBean() {
-        this.tema = new TemaEntity();
-        this.temas = new ArrayList<TemaEntity>();
     }
 
     public EliminarTemaBean(String autorizacion, TemaEntity tema, List<TemaEntity> temas) {
