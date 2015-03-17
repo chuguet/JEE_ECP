@@ -8,13 +8,11 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 @ManagedBean
 public class AnadirTemaBean extends ViewBean {
 
-    private boolean error;
+    private boolean error = false;
 
-    private TemaEntity tema;
+    private TemaEntity tema = new TemaEntity();
 
     public AnadirTemaBean() {
-        this.error = false;
-        this.tema = new TemaEntity();
     }
 
     public AnadirTemaBean(TemaEntity tema) {
