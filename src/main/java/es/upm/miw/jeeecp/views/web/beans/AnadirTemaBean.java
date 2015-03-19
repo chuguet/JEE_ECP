@@ -1,5 +1,6 @@
 package es.upm.miw.jeeecp.views.web.beans;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 import es.upm.miw.jeeecp.controllers.AnadirTemaController;
@@ -10,7 +11,12 @@ public class AnadirTemaBean extends ViewBean {
 
     private boolean error;
 
-    private TemaEntity tema = new TemaEntity();
+    private TemaEntity tema;
+
+    @PostConstruct
+    public void init() {
+        this.tema = new TemaEntity();
+    }
 
     public AnadirTemaBean() {
     }

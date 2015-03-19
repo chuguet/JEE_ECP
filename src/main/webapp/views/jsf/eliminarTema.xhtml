@@ -11,20 +11,21 @@
 	<h:body>
 		<h2>#{msgs.borrarTema}</h2>
 
-		<h:form rendered="#{eliminarTemaBean.autorizacion==666}">
-			<h5>#{msgs.seleccionarTemaBorrar}</h5>
-			<h:inputHidden value="#{eliminarTemaBean.autorizacion}" />
-			<h:selectOneRadio>
-				<f:selectItems var="tema" itemLabel="#{tema.nombre}" itemValue="#{tema.id}" value="#{eliminarTemaBean.temas}"></f:selectItems>
-			</h:selectOneRadio>
-			<br />
-			<h:commandButton value="#{msgs.borrar}" type="submit" action="#{eliminarTemaBean.process}" />
-		</h:form>
-		<h:form rendered="#{eliminarTemaBean.autorizacion!=666}">
-			<label for="autorizacion">#{msgs.codigoAutorizacion}</label>
-			<h:inputText id="autorizacion" value="#{eliminarTemaBean.autorizacion}" />
-			<br />
-			<h:commandButton value="#{msgs.enviar}" type="submit" action="#{eliminarTemaBean.process}" />
+		<h:form>
+			<ui:fragment rendered="#{eliminarTemaBean.autorizacion==666}">
+				<h5>#{msgs.seleccionarTemaBorrar}</h5>
+				<h:selectOneRadio value="#{eliminarTemaBean.temaId}">
+					<f:selectItems value="#{eliminarTemaBean.temas}" var="tema" itemValue="#{tema.id}" itemLabel="#{tema.nombre}" />
+				</h:selectOneRadio>
+				<br />
+				<h:commandButton value="#{msgs.borrar}" type="submit" action="#{eliminarTemaBean.eliminar}" />
+			</ui:fragment>
+			<ui:fragment rendered="#{eliminarTemaBean.autorizacion!=666}">
+				<label for="autorizacion">#{msgs.codigoAutorizacion}</label>
+				<h:inputText id="autorizacion" value="#{eliminarTemaBean.autorizacion}" />
+				<br />
+				<h:commandButton value="#{msgs.enviar}" type="submit" action="#{eliminarTemaBean.autorizar}" />
+			</ui:fragment>
 		</h:form>
 
 		<br />

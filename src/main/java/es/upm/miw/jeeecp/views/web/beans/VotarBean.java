@@ -46,6 +46,13 @@ public class VotarBean extends ViewBean {
         return null;
     }
 
+    public void update() {
+        VotarController votarController = this.getControllerFactory().getVotarController();
+        this.setTemas(votarController.recuperaTemas());
+        this.setTema(new TemaEntity());
+        this.setVoto(new VotoEntity());
+    }
+
     public TemaEntity getTema() {
         return tema;
     }

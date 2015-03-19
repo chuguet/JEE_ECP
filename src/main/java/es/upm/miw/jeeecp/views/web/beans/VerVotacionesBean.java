@@ -3,6 +3,7 @@ package es.upm.miw.jeeecp.views.web.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 import es.upm.miw.jeeecp.controllers.VerVotacionesController;
@@ -16,9 +17,15 @@ public class VerVotacionesBean extends ViewBean {
     public VerVotacionesBean() {
     }
 
-    private List<TemaEntity> temas = new ArrayList<TemaEntity>();
+    @PostConstruct
+    public void init() {
+        this.temas = new ArrayList<TemaEntity>();
+        this.tema = new TemaEntity();
+    }
 
-    private TemaEntity tema = new TemaEntity();
+    private List<TemaEntity> temas;
+
+    private TemaEntity tema;
 
     private NivelEstudios nivelEstudios;
 
@@ -86,4 +93,15 @@ public class VerVotacionesBean extends ViewBean {
         }
         return null;
     }
+
+    public String seleccionarTema() {
+        System.out.println("LLEGO");
+        return null;
+    }
+
+    public void update() {
+        VotarController votarController = this.getControllerFactory().getVotarController();
+        this.setTemas(votarController.recuperaTemas());
+    }
+
 }
