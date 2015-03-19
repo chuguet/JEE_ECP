@@ -14,7 +14,7 @@
 		<h:form>
 			<ui:fragment rendered="#{eliminarTemaBean.autorizacion==666}">
 				<h5>#{msgs.seleccionarTemaBorrar}</h5>
-				<h:selectOneRadio value="#{eliminarTemaBean.temaId}">
+				<h:selectOneRadio>
 					<f:selectItems value="#{eliminarTemaBean.temas}" var="tema" itemValue="#{tema.id}" itemLabel="#{tema.nombre}" />
 				</h:selectOneRadio>
 				<br />
