@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html lang="#{msgs.language}" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html">
 <f:view locale="#{i18n.locale}">
 	<h:head>
 		<title>#{msgs.borrarTema}</title>
@@ -12,20 +11,20 @@
 		<h2>#{msgs.borrarTema}</h2>
 
 		<h:form>
-			<ui:fragment rendered="#{eliminarTemaBean.autorizacion==666}">
+			<h:panelGroup rendered="#{eliminarTemaBean.autorizado}">
 				<h5>#{msgs.seleccionarTemaBorrar}</h5>
 				<h:selectOneRadio value="#{eliminarTemaBean.tema.id}">
 					<f:selectItems value="#{eliminarTemaBean.temas}" var="tema" itemValue="#{tema.id}" itemLabel="#{tema.nombre}" />
 				</h:selectOneRadio>
 				<br />
 				<h:commandButton value="#{msgs.borrar}" type="submit" action="#{eliminarTemaBean.eliminar}" />
-			</ui:fragment>
-			<ui:fragment rendered="#{eliminarTemaBean.autorizacion!=666}">
+			</h:panelGroup>
+			<h:panelGroup rendered="#{not eliminarTemaBean.autorizado}">
 				<label for="autorizacion">#{msgs.codigoAutorizacion}</label>
-				<h:inputText id="autorizacion" value="#{eliminarTemaBean.autorizacion}" />
+				<h:inputText value="#{eliminarTemaBean.autorizacion}" />
 				<br />
 				<h:commandButton value="#{msgs.enviar}" type="submit" action="#{eliminarTemaBean.autorizar}" />
-			</ui:fragment>
+			</h:panelGroup>
 		</h:form>
 
 		<br />

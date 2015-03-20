@@ -8,11 +8,18 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 
 public class EliminarTemaEJBController implements EliminarTemaController {
 
+	private static final String CLAVE = "666";
+	
     @Override
     public void eliminarTema(TemaEntity temaEntity) {
         DAOFactory.setFactory(new DAOJpaFactory());
         TemaDAO dao = DAOFactory.getFactory().getTemaDAO();
         dao.deleteById(temaEntity.getId());
     }
+
+	@Override
+	public Boolean autorizar(String autorizacion) {
+		return CLAVE.equals(autorizacion);
+	}
 
 }

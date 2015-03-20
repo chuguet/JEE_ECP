@@ -6,4 +6,6 @@ public interface EliminarTemaController {
 
     void eliminarTema(TemaEntity temaEntity);
 
+	Boolean autorizar(String autorizacion);
+
 }
