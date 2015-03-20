@@ -44,7 +44,7 @@
 				<span id="valoracion_texto">Puntuaci&oacute;n: 0</span><br />
 				<label for="nivel_estudios">Elija el nivel de estudios: </label>
 				<select id="nivel_estudios" name="nivel_estudios">
-					<c:forEach items="${bean.nivelEstudios}" var="nivelEstudios">
+					<c:forEach items="${bean.nivelEstudiosList}" var="nivelEstudios">
 						<option value="${nivelEstudios}">${nivelEstudios}</option>
 					</c:forEach>
 				</select> 

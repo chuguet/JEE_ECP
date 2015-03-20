@@ -17,7 +17,9 @@ public class VotarBean extends ViewBean {
     public VotarBean() {
     }
 
-    private List<String> nivelEstudios = new ArrayList<String>();
+    private String nivelEstudios;
+    
+    private List<String> nivelEstudiosList = new ArrayList<String>();
     
     private VotoEntity voto = new VotoEntity();
 
@@ -42,11 +44,13 @@ public class VotarBean extends ViewBean {
             this.setVoto(new VotoEntity());
             this.setTema(new TemaEntity());
             this.setTemas(votarController.recuperaTemas());
+            this.setNivelEstudiosList(votarController.recuperaNivelEstudios());
         } else {
             if (this.getTema().getId() == null) {
                 this.setTemas(votarController.recuperaTemas());
             } else {
                 this.setTema(votarController.buscaTema(this.getTema().getId()));
+                this.setNivelEstudiosList(votarController.recuperaNivelEstudios());
             }
         }
         return null;
@@ -63,14 +67,14 @@ public class VotarBean extends ViewBean {
     }
 
     public String votar(){
-    	
+    	System.out.println(this.getNivelEstudios());
     	return null;
     }
     
     public void update() {
         VotarController votarController = this.getControllerFactory().getVotarController();
         this.setTemas(votarController.recuperaTemas());
-        this.setNivelEstudios(votarController.recuperaNivelEstudios());
+        this.setNivelEstudiosList(votarController.recuperaNivelEstudios());
     }
 
     public TemaEntity getTema() {
@@ -89,11 +93,11 @@ public class VotarBean extends ViewBean {
         this.voto = voto;
     }
 
-	public List<String> getNivelEstudios() {
+	public String getNivelEstudios() {
 		return nivelEstudios;
 	}
 
-	public void setNivelEstudios(List<String> nivelEstudios) {
+	public void setNivelEstudios(String nivelEstudios) {
 		this.nivelEstudios = nivelEstudios;
 	}
 
@@ -103,6 +107,14 @@ public class VotarBean extends ViewBean {
 
 	public void setTemaId(Integer temaId) {
 		this.temaId = temaId;
+	}
+
+	public List<String> getNivelEstudiosList() {
+		return nivelEstudiosList;
+	}
+
+	public void setNivelEstudiosList(List<String> nivelEstudiosList) {
+		this.nivelEstudiosList = nivelEstudiosList;
 	}
 	
 }
