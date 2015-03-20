@@ -33,25 +33,24 @@ public class AnadirTemaBean extends ViewBean {
         this.tema = tema;
     }
 
-    public String process() {
-        AnadirTemaController anadirTemaController = this.getControllerFactory()
-                .getAnadirTemaController();
-        Boolean existeTema = anadirTemaController.existeTema(this.getTema());
-        if (!existeTema) {
-            anadirTemaController.anadirTema(this.getTema());
-            this.setTema(new TemaEntity());
-            this.setError(false);
-        } else {
-            this.setError(true);
-        }
-        return null;
-    }
-
     public boolean isError() {
         return error;
     }
 
     public void setError(boolean error) {
         this.error = error;
+    }
+    
+    public String process() {
+        AnadirTemaController anadirTemaController = this.getControllerFactory()
+                .getAnadirTemaController();
+        if (anadirTemaController.existeTema(this.getTema())) {
+            this.setError(true);
+        } else {
+            anadirTemaController.anadirTema(this.getTema());
+            this.setTema(new TemaEntity());
+            this.setError(false);
+        }
+        return null;
     }
 }
