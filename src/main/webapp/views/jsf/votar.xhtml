@@ -2,13 +2,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 <script type="text/javascript">
 	function change() {
 		var value = document.getElementById("valoracion").value
-		document.getElementById("valoracion_texto").innerHTML = "Puntuación: "
+		document.getElementById("valoracion_texto").innerHTML = "#{msgs.puntuacion}"
 				+ value;
 	}
 	function load() {
@@ -18,40 +17,38 @@
 		}
 	}
 </script>
-<title>Votar</title>
+<title>#{msgs.votar}</title>
 </h:head>
 <h:body onload="load()">
-	<h2>Votar</h2>
+	<h2>#{msgs.votar}</h2>
 	
 	<f:event listener="#{votarBean.update}" type="preRenderComponent"/>
 	
 	<h:form>
-		<ui:fragment rendered="#{votarBean.tema.id==null}">
-			<h5>Elige un tema para votar:</h5>
-				<h:selectOneRadio>
+		<h:panelGroup rendered="#{votarBean.temaId==null}">
+			<h5>#{msgs.eligeTema}</h5>
+				<h:selectOneRadio value="#{votarBean.temaId}">
 					<f:selectItems var="tema" itemLabel="#{tema.nombre}" itemValue="#{tema.id}" value="#{votarBean.temas}"></f:selectItems>
 				</h:selectOneRadio>
 				<br />
-				<h:commandButton value="#{msgs.votar}" type="submit" action="#{votarBean.process}" />
-		</ui:fragment>
-		<ui:fragment rendered="#{votarBean.tema.id!=null}">
-			<h5>Vote para el siguiente tema: #{votarBean.tema.nombre}</h5>
+				<h:commandButton value="#{msgs.votar}" type="submit" action="#{votarBean.seleccionarTema}" />
+		</h:panelGroup>
+		<h:panelGroup rendered="#{votarBean.temaId!=null}">
+			<h5>#{msgs.votarTema}#{votarBean.tema.nombre}</h5>
 				<h:inputHidden value="#{votarBean.tema.id}" />
-				<p>Pregunta: #{votarBean.tema.pregunta}</p>
+				<p>#{msgs.pregunta}#{votarBean.tema.pregunta}</p>
 				<br />
 				<label for="valoracion">Elija la valoracion: </label>
 				<input type="range" id="valoracion" name="valoracion" value="0" min="0" max="10" />
 				<span id="valoracion_texto">Puntuación: 0</span>
 				<br />
 				<label for="nivel_estudios">Elija el nivel de estudios: </label>
-				<select id="nivel_estudios" name="nivel_estudios">
-					<option value="LICENCIADO">Licenciado</option>
-					<option value="DIPLOMADO">Diplomado</option>
-					<option value="BACHILLERATO">Bachillerato</option>
-				</select>
+				<h:selectOneMenu value="#{votarBean.tema.id}">
+					<f:selectItems var="nivelEstudios" itemLabel="#{nivelEstudios}" itemValue="#{nivelEstudios}" value="#{votarBean.nivelEstudios}"></f:selectItems>
+				</h:selectOneMenu>
 				<br />
-				<h:commandButton value="#{msgs.votar}" type="submit" action="#{votarBean.process}" />
-		</ui:fragment>
+				<h:commandButton value="#{msgs.votar}" type="submit" action="#{votarBean.votar}" />
+		</h:panelGroup>
 	</h:form>
 	
 	<br />

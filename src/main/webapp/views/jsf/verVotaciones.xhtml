@@ -29,9 +29,9 @@
 			<ui:fragment rendered="#{verVotacionesBean.tema.id} == null">
 				<label for="nivel_estudios">Elija el nivel de estudios: </label>
 				<select id="nivel_estudios" name="nivel_estudios">
-					<option value="LICENCIADO">Licenciado</option>
-					<option value="DIPLOMADO">Diplomado</option>
-					<option value="BACHILLERATO">Bachillerato</option>
+					<c:forEach items="${bean.nivelEstudios}" var="nivelEstudios">
+						<option value="${nivelEstudios}">${nivelEstudios}</option>
+					</c:forEach>
 				</select>
 				<br/>
 				<h:commandButton value="#{msgs.seleccionar}" type="submit" action="#{verVotacionesBean.process}" />

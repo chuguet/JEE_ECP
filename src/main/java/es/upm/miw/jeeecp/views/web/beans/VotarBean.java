@@ -22,6 +22,8 @@ public class VotarBean extends ViewBean {
     private VotoEntity voto = new VotoEntity();
 
     private TemaEntity tema = new TemaEntity();
+    
+    private Integer temaId;
 
     private List<TemaEntity> temas = new ArrayList<TemaEntity>();
 
@@ -47,15 +49,27 @@ public class VotarBean extends ViewBean {
                 this.setTema(votarController.buscaTema(this.getTema().getId()));
             }
         }
-        this.setNivelEstudios(votarController.recuperaNivelEstudios());
         return null;
     }
+    
+    public String seleccionarTema(){
+        VotarController votarController = this.getControllerFactory().getVotarController();
+    	if (this.getTemaId() == null) {
+            this.setTemas(votarController.recuperaTemas());
+        } else {
+            this.setTema(votarController.buscaTema(this.getTemaId()));
+        }
+    	return null;
+    }
 
+    public String votar(){
+    	
+    	return null;
+    }
+    
     public void update() {
         VotarController votarController = this.getControllerFactory().getVotarController();
         this.setTemas(votarController.recuperaTemas());
-        this.setTema(new TemaEntity());
-        this.setVoto(new VotoEntity());
         this.setNivelEstudios(votarController.recuperaNivelEstudios());
     }
 
@@ -83,4 +97,12 @@ public class VotarBean extends ViewBean {
 		this.nivelEstudios = nivelEstudios;
 	}
 
+	public Integer getTemaId() {
+		return temaId;
+	}
+
+	public void setTemaId(Integer temaId) {
+		this.temaId = temaId;
+	}
+	
 }
