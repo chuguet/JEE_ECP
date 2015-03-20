@@ -44,9 +44,9 @@
 				<span id="valoracion_texto">Puntuaci&oacute;n: 0</span><br />
 				<label for="nivel_estudios">Elija el nivel de estudios: </label>
 				<select id="nivel_estudios" name="nivel_estudios">
-					<option value="LICENCIADO">Licenciado</option>
-					<option value="DIPLOMADO">Diplomado</option>
-					<option value="BACHILLERATO">Bachillerato</option>
+					<c:forEach items="${bean.nivelEstudios}" var="nivelEstudios">
+						<option value="${nivelEstudios}">${nivelEstudios}</option>
+					</c:forEach>
 				</select> 
 				<br /> 
 				<input type="submit" value="Votar" />

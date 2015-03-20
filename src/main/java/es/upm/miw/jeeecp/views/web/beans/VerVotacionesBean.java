@@ -23,6 +23,8 @@ public class VerVotacionesBean extends ViewBean {
         this.tema = new TemaEntity();
     }
 
+    private List<String> nivelEstudiosList = new ArrayList<String>();
+    
     private List<TemaEntity> temas;
 
     private TemaEntity tema;
@@ -91,6 +93,7 @@ public class VerVotacionesBean extends ViewBean {
                     this.getTema(), this.getNivelEstudios()));
             this.setNivelEstudios(this.getNivelEstudios());
         }
+        this.setNivelEstudiosList(votarController.recuperaNivelEstudios());
         return null;
     }
 
@@ -102,6 +105,15 @@ public class VerVotacionesBean extends ViewBean {
     public void update() {
         VotarController votarController = this.getControllerFactory().getVotarController();
         this.setTemas(votarController.recuperaTemas());
+        this.setNivelEstudiosList(votarController.recuperaNivelEstudios());
     }
+
+	public List<String> getNivelEstudiosList() {
+		return nivelEstudiosList;
+	}
+
+	public void setNivelEstudiosList(List<String> nivelEstudiosList) {
+		this.nivelEstudiosList = nivelEstudiosList;
+	}
 
 }

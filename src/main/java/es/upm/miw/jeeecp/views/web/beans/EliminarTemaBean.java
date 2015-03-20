@@ -15,84 +15,101 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 @ViewScoped
 public class EliminarTemaBean extends ViewBean {
 
-    private static final String CLAVE = "666";
+	private String autorizacion;
 
-    private String autorizacion;
+	private boolean autorizado;
 
-    private TemaEntity tema;
+	private TemaEntity tema;
 
-    private List<TemaEntity> temas;
+	private List<TemaEntity> temas;
 
-    public EliminarTemaBean() {
-    }
+	public EliminarTemaBean() {
+	}
 
-    @PostConstruct
-    public void init() {
-        this.temas = new ArrayList<TemaEntity>();
-        this.tema = new TemaEntity();
-    }
+	@PostConstruct
+	public void init() {
+		this.temas = new ArrayList<TemaEntity>();
+		this.tema = new TemaEntity();
+	}
 
-    public EliminarTemaBean(String autorizacion, TemaEntity tema, List<TemaEntity> temas) {
-        this.autorizacion = autorizacion;
-        this.tema = tema;
-        this.temas = temas;
-    }
+	public EliminarTemaBean(String autorizacion, TemaEntity tema,
+			List<TemaEntity> temas) {
+		this.autorizacion = autorizacion;
+		this.tema = tema;
+		this.temas = temas;
+	}
 
-    public String getAutorizacion() {
-        return autorizacion;
-    }
+	public String getAutorizacion() {
+		return autorizacion;
+	}
 
-    public void setAutorizacion(String autorizacion) {
-        this.autorizacion = autorizacion;
-    }
+	public void setAutorizacion(String autorizacion) {
+		this.autorizacion = autorizacion;
+	}
 
-    public TemaEntity getTema() {
-        return tema;
-    }
+	public TemaEntity getTema() {
+		return tema;
+	}
 
-    public void setTema(TemaEntity tema) {
-        this.tema = tema;
-    }
+	public void setTema(TemaEntity tema) {
+		this.tema = tema;
+	}
 
-    public List<TemaEntity> getTemas() {
-        return temas;
-    }
+	public List<TemaEntity> getTemas() {
+		return temas;
+	}
 
-    public void setTemas(List<TemaEntity> temas) {
-        this.temas = temas;
-    }
+	public void setTemas(List<TemaEntity> temas) {
+		this.temas = temas;
+	}
 
-    public String process() {
-        EliminarTemaController eliminarTemaController = this.getControllerFactory()
-                .getEliminarTemaController();
-        VotarController votarController = this.getControllerFactory().getVotarController();
-        if (this.autorizacion.equals(CLAVE)) {
-            if (this.getTema().getId() != null) {
-                eliminarTemaController.eliminarTema(this.getTema());
-            }
-            this.setTemas(votarController.recuperaTemas());
-            this.setTema(new TemaEntity());
-        }
-        return null;
-    }
+	public boolean isAutorizado() {
+		return autorizado;
+	}
 
-    public String eliminar() {
-        EliminarTemaController eliminarTemaController = this.getControllerFactory()
-                .getEliminarTemaController();
-        VotarController votarController = this.getControllerFactory().getVotarController();
-        if (this.getTema().getId() != null) {
-            eliminarTemaController.eliminarTema(this.getTema());
-        }
-        this.setTemas(votarController.recuperaTemas());
-        return null;
-    }
+	public void setAutorizado(boolean autorizado) {
+		this.autorizado = autorizado;
+	}
 
-    public String autorizar() {
-        VotarController votarController = this.getControllerFactory().getVotarController();
-        if (this.autorizacion.equals(CLAVE)) {
-            this.setTemas(votarController.recuperaTemas());
-        }
-        return null;
-    }
+
+	public String process() {
+		EliminarTemaController eliminarTemaController = this
+				.getControllerFactory().getEliminarTemaController();
+		VotarController votarController = this.getControllerFactory()
+				.getVotarController();
+		this.setAutorizado(eliminarTemaController.autorizar(this.getAutorizacion()));
+		if (this.isAutorizado()) {
+			if (this.getTema().getId() != null) {
+				eliminarTemaController.eliminarTema(this.getTema());
+			}
+			this.setTemas(votarController.recuperaTemas());
+			this.setTema(new TemaEntity());
+		}
+		return null;
+	}
+
+	public String eliminar() {
+		EliminarTemaController eliminarTemaController = this
+				.getControllerFactory().getEliminarTemaController();
+		VotarController votarController = this.getControllerFactory()
+				.getVotarController();
+		if (this.getTema().getId() != null) {
+			eliminarTemaController.eliminarTema(this.getTema());
+		}
+		this.setTemas(votarController.recuperaTemas());
+		return null;
+	}
+
+	public String autorizar() {
+		VotarController votarController = this.getControllerFactory()
+				.getVotarController();
+		EliminarTemaController eliminarTemaController = this
+				.getControllerFactory().getEliminarTemaController();
+		this.setAutorizado(eliminarTemaController.autorizar(this.getAutorizacion()));
+		if (this.isAutorizado()) {
+			this.setTemas(votarController.recuperaTemas());
+		}
+		return null;
+	}
 
 }

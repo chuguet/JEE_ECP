@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import es.upm.miw.jeeecp.controllers.VotarController;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 import es.upm.miw.jeeecp.models.entities.VotoEntity;
 
 @ManagedBean
+@ViewScoped
 public class VotarBean extends ViewBean {
 
     public VotarBean() {
     }
 
+    private List<String> nivelEstudios = new ArrayList<String>();
+    
     private VotoEntity voto = new VotoEntity();
 
     private TemaEntity tema = new TemaEntity();
@@ -43,6 +47,7 @@ public class VotarBean extends ViewBean {
                 this.setTema(votarController.buscaTema(this.getTema().getId()));
             }
         }
+        this.setNivelEstudios(votarController.recuperaNivelEstudios());
         return null;
     }
 
@@ -51,6 +56,7 @@ public class VotarBean extends ViewBean {
         this.setTemas(votarController.recuperaTemas());
         this.setTema(new TemaEntity());
         this.setVoto(new VotoEntity());
+        this.setNivelEstudios(votarController.recuperaNivelEstudios());
     }
 
     public TemaEntity getTema() {
@@ -68,5 +74,13 @@ public class VotarBean extends ViewBean {
     public void setVoto(VotoEntity voto) {
         this.voto = voto;
     }
+
+	public List<String> getNivelEstudios() {
+		return nivelEstudios;
+	}
+
+	public void setNivelEstudios(List<String> nivelEstudios) {
+		this.nivelEstudios = nivelEstudios;
+	}
 
 }

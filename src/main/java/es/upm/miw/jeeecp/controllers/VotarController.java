@@ -13,4 +13,6 @@ public interface VotarController {
 
     void votar(TemaEntity tema, VotoEntity voto);
 
+	List<String> recuperaNivelEstudios();
+
 }
