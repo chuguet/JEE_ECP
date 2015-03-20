@@ -1,5 +1,6 @@
 package es.upm.miw.jeeecp.controllers.ejb;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import es.upm.miw.jeeecp.controllers.AnadirTemaController;
@@ -9,6 +10,7 @@ import es.upm.miw.jeeecp.controllers.VerVotacionesController;
 import es.upm.miw.jeeecp.controllers.VotarController;
 
 @ManagedBean
+@ApplicationScoped
 public class ControllerEJBFactory extends ControllerFactory {
 
     @Override

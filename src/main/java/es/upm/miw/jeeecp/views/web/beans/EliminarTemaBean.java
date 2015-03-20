@@ -5,12 +5,14 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import es.upm.miw.jeeecp.controllers.EliminarTemaController;
 import es.upm.miw.jeeecp.controllers.VotarController;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 
 @ManagedBean
+@ViewScoped
 public class EliminarTemaBean extends ViewBean {
 
     private static final String CLAVE = "666";
