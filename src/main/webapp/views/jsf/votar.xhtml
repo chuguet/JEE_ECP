@@ -38,11 +38,11 @@
 				<h:inputHidden value="#{votarBean.tema.id}" />
 				<p>#{msgs.pregunta}#{votarBean.tema.pregunta}</p>
 				<br />
-				<label for="valoracion">Elija la valoracion: </label>
+				<label for="valoracion">#{msgs.eligeValoracion}</label>
 				<input type="range" id="valoracion" name="valoracion" value="0" min="0" max="10" />
-				<span id="valoracion_texto">Puntuación: 0</span>
+				<span id="valoracion_texto">#{msgs.puntuacion}0</span>
 				<br />
-				<label for="nivel_estudios">Elija el nivel de estudios: </label>
+				<label for="nivel_estudios">#{msgs.eligeNivelEstudios}</label>
 				<h:selectOneMenu value="#{votarBean.nivelEstudios}">
 					<f:selectItems var="nivelEstudios" itemLabel="#{nivelEstudios}" itemValue="#{nivelEstudios}" value="#{votarBean.nivelEstudios}"></f:selectItems>
 				</h:selectOneMenu>
