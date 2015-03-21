@@ -30,22 +30,26 @@
 					<input type="hidden" name="id" value="${bean.tema.id}"/>
 					<label for="votos">N&uacute;mero de votos: </label>
 					<span id="votos">${bean.numeroVotos}</span><br/>
-					<c:choose>
-						<c:when test="${empty bean.mediaVotos}">
-							<label for="nivel_estudios">Elija el nivel de estudios: </label>
-							<select id="nivel_estudios" name="nivel_estudios">
-								<c:forEach items="${bean.nivelEstudiosList}" var="nivelEstudios">
-									<option value="${nivelEstudios}">${nivelEstudios}</option>
-								</c:forEach>
-							</select>
-							<br/>
-							<input type="submit" value="Seleccionar" />
-						</c:when>
-						<c:otherwise>
-							<label for="media">Para el nivel de estudios ${bean.nivelEstudios} hay una media de: </label>
-							<span id="media">${bean.mediaVotos}</span>
-						</c:otherwise>
-					</c:choose>
+					<label for="nivel_estudios">Elija el nivel de estudios: </label>
+					<select id="nivel_estudios" name="nivel_estudios">
+						<c:forEach items="${bean.nivelEstudiosList}" var="nivelEstudiosIt">
+							<c:choose>
+								<c:when test="${nivelEstudiosIt == bean.nivelEstudios}">
+									<option selected value="${nivelEstudiosIt}">${nivelEstudiosIt}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${nivelEstudiosIt}">${nivelEstudiosIt}</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select>
+					<br/>
+					<input type="submit" value="Seleccionar" />
+					<br/>
+					<c:if test="${not empty bean.mediaVotos}">
+						<label for="media">Para el nivel de estudios ${bean.nivelEstudios} hay una media de: </label>
+						<span id="media">${bean.mediaVotos}</span>
+					</c:if>
 				</form>
 			</c:otherwise>
 		</c:choose>
