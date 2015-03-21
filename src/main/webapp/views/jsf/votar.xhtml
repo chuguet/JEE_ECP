@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
 <h:head>
 <script type="text/javascript">
 	function change() {
@@ -39,12 +40,12 @@
 				<p>#{msgs.pregunta}#{votarBean.tema.pregunta}</p>
 				<br />
 				<label for="valoracion">#{msgs.eligeValoracion}</label>
-				<input type="range" id="valoracion" name="valoracion" value="0" min="0" max="10" />
+				<input type="range" id="valoracion" jsf:value="#{votarBean.voto.valoracion}" min="0" max="10" />
 				<span id="valoracion_texto">#{msgs.puntuacion}0</span>
 				<br />
 				<label for="nivel_estudios">#{msgs.eligeNivelEstudios}</label>
 				<h:selectOneMenu value="#{votarBean.nivelEstudios}">
-					<f:selectItems var="nivelEstudios" itemLabel="#{nivelEstudios}" itemValue="#{nivelEstudios}" value="#{votarBean.nivelEstudios}"></f:selectItems>
+					<f:selectItems var="nivelEstudios" itemLabel="#{nivelEstudios}" itemValue="#{nivelEstudios}" value="#{votarBean.nivelEstudiosList}"></f:selectItems>
 				</h:selectOneMenu>
 				<br />
 				<h:commandButton value="#{msgs.votar}" type="submit" action="#{votarBean.votar}" />

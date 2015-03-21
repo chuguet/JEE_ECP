@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import es.upm.miw.jeeecp.controllers.VotarController;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
 import es.upm.miw.jeeecp.models.entities.VotoEntity;
+import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
 @ManagedBean
 @ViewScoped
@@ -18,13 +21,13 @@ public class VotarBean extends ViewBean {
     }
 
     private String nivelEstudios;
-    
+
     private List<String> nivelEstudiosList = new ArrayList<String>();
-    
+
     private VotoEntity voto = new VotoEntity();
 
     private TemaEntity tema = new TemaEntity();
-    
+
     private Integer temaId;
 
     private List<TemaEntity> temas = new ArrayList<TemaEntity>();
@@ -55,22 +58,33 @@ public class VotarBean extends ViewBean {
         }
         return null;
     }
-    
-    public String seleccionarTema(){
+
+    public String seleccionarTema() {
         VotarController votarController = this.getControllerFactory().getVotarController();
-    	if (this.getTemaId() == null) {
-            this.setTemas(votarController.recuperaTemas());
-        } else {
+        if (this.getTemaId() != null) {
             this.setTema(votarController.buscaTema(this.getTemaId()));
+            this.getVoto().setValoracion(0);
         }
-    	return null;
+        return null;
     }
 
-    public String votar(){
-    	System.out.println(this.getNivelEstudios());
-    	return null;
+    public String votar() {
+        VotarController votarController = this.getControllerFactory().getVotarController();
+        this.getVoto().setNivelEstudios(NivelEstudios.valueOf(this.getNivelEstudios()));
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequest();
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+        this.getVoto().setIp(ipAddress);
+        votarController.votar(this.getTema(), this.getVoto());
+        this.setVoto(new VotoEntity());
+        this.setTema(new TemaEntity());
+        this.setTemaId(null);
+        return null;
     }
-    
+
     public void update() {
         VotarController votarController = this.getControllerFactory().getVotarController();
         this.setTemas(votarController.recuperaTemas());
@@ -93,28 +107,28 @@ public class VotarBean extends ViewBean {
         this.voto = voto;
     }
 
-	public String getNivelEstudios() {
-		return nivelEstudios;
-	}
+    public String getNivelEstudios() {
+        return nivelEstudios;
+    }
 
-	public void setNivelEstudios(String nivelEstudios) {
-		this.nivelEstudios = nivelEstudios;
-	}
+    public void setNivelEstudios(String nivelEstudios) {
+        this.nivelEstudios = nivelEstudios;
+    }
 
-	public Integer getTemaId() {
-		return temaId;
-	}
+    public Integer getTemaId() {
+        return temaId;
+    }
 
-	public void setTemaId(Integer temaId) {
-		this.temaId = temaId;
-	}
+    public void setTemaId(Integer temaId) {
+        this.temaId = temaId;
+    }
 
-	public List<String> getNivelEstudiosList() {
-		return nivelEstudiosList;
-	}
+    public List<String> getNivelEstudiosList() {
+        return nivelEstudiosList;
+    }
 
-	public void setNivelEstudiosList(List<String> nivelEstudiosList) {
-		this.nivelEstudiosList = nivelEstudiosList;
-	}
-	
+    public void setNivelEstudiosList(List<String> nivelEstudiosList) {
+        this.nivelEstudiosList = nivelEstudiosList;
+    }
+
 }
