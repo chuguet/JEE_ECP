@@ -13,7 +13,7 @@
 	<h2>Eliminar tema</h2>
 
 		<c:choose>
-			<c:when test="${bean.autorizacion==666}">
+			<c:when test="${bean.autorizado == true}">
 				<h5>Seleccione el tema que desea borrar:</h5>
 			    <form method="POST" action="/JEE_ECP/jsp/eliminarTema">
 					<input type="hidden" name="autorizacion" value="${bean.autorizacion}"/>
