@@ -13,11 +13,13 @@
 		<h:form>
 			<h:panelGroup rendered="#{eliminarTemaBean.autorizado}">
 				<h5>#{msgs.seleccionarTemaBorrar}</h5>
-				<h:selectOneRadio value="#{eliminarTemaBean.tema.id}">
+				<h:selectOneRadio id="temas" value="#{eliminarTemaBean.tema.id}">
 					<f:selectItems value="#{eliminarTemaBean.temas}" var="tema" itemValue="#{tema.id}" itemLabel="#{tema.nombre}" />
 				</h:selectOneRadio>
 				<br />
-				<h:commandButton value="#{msgs.borrar}" type="submit" action="#{eliminarTemaBean.eliminar}" />
+				<h:commandButton value="#{msgs.borrar}" type="submit" action="#{eliminarTemaBean.eliminar}">
+					<f:ajax execute="@form" render="temas" />
+				</h:commandButton>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{not eliminarTemaBean.autorizado}">
 				<label for="autorizacion">#{msgs.codigoAutorizacion}</label>
