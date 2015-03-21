@@ -2,47 +2,48 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
+	xmlns:h="http://java.sun.com/jsf/html">
+<f:view locale="#{i18n.locale}">
+<h:head>
 	<title>#{msgs.verVotaciones}</title>
-</head>
-<body>
+</h:head>
+<h:body>
 	<h2>#{msgs.verVotaciones}</h2>
 
 	<f:event listener="#{verVotacionesBean.update}" type="preRenderComponent"/>
+	
 	<h:form>
-		<ui:fragment rendered="#{empty verVotaciones.tema.id}">
+		<h:panelGroup rendered="#{verVotacionesBean.numeroVotos==null}">
 			<h5>#{msgs.verVotos}</h5>
-			<h:selectOneRadio>
+			<h:selectOneRadio value="#{verVotacionesBean.tema.id}">
 				<f:selectItems value="#{verVotacionesBean.temas}" var="tema" itemValue="#{tema.id}" itemLabel="#{tema.nombre}" />
 			</h:selectOneRadio>
 			<br/>
-			<h:commandButton value="#{msgs.seleccionar}" type="submit" action="#{verVotacionesBean.seleccionarTema()}" />
-		</ui:fragment>
+			<h:commandButton value="#{msgs.seleccionar}" type="submit" action="#{verVotacionesBean.seleccionarTema}" />
+		</h:panelGroup>
 			
-		<ui:fragment rendered="#{not empty verVotaciones.tema.id}">
+		<h:panelGroup rendered="#{verVotacionesBean.numeroVotos!=null}">
 			<h5>#{msgs.seleccionarNivelEstudios} ${verVotacionesBean.tema.nombre}</h5>
-			<input type="hidden" name="id" value="#{verVotacionesBean.tema.id}"/>
+			<h:inputHidden value="#{verVotacionesBean.tema.id}"/>
 			<label for="votos">#{msgs.numeroVotos}</label>
 			<span id="votos">#{verVotacionesBean.numeroVotos}</span><br/>
-			<ui:fragment rendered="#{verVotacionesBean.tema.id} == null">
-				<label for="nivel_estudios">Elija el nivel de estudios: </label>
-				<select id="nivel_estudios" name="nivel_estudios">
-					<c:forEach items="${bean.nivelEstudios}" var="nivelEstudios">
-						<option value="${nivelEstudios}">${nivelEstudios}</option>
-					</c:forEach>
-				</select>
+			<h:panelGroup rendered="#{verVotacionesBean.tema.id != null}">
+				<label for="nivel_estudios">#{msgs.eligeNivelEstudios}</label>
+				<h:selectOneMenu value="#{verVotacionesBean.nivelEstudios}">
+					<f:selectItems var="nivelEstudios" itemLabel="#{nivelEstudios}" itemValue="#{nivelEstudios}" value="#{verVotacionesBean.nivelEstudiosList}"></f:selectItems>
+				</h:selectOneMenu>
 				<br/>
-				<h:commandButton value="#{msgs.seleccionar}" type="submit" action="#{verVotacionesBean.process}" />
-			</ui:fragment>
-			<ui:fragment rendered="#{verVotacionesBean.tema.id} != null">
-					<label for="media">Para el nivel de estudios ${verVotacionesBean.nivelEstudios} hay una media de: </label>
+				<h:commandButton value="#{msgs.seleccionar}" type="submit" action="#{verVotacionesBean.seleccionarNivelEstudios}" />
+			</h:panelGroup>
+			<br/>
+			<h:panelGroup rendered="#{verVotacionesBean.mediaVotos != null}">
+					<label for="media">#{msgs.paraNivelEstudios} ${verVotacionesBean.nivelEstudios} #{msgs.mediaDe} </label>
 					<span id="media">${verVotacionesBean.mediaVotos}</span>
-			</ui:fragment>
-		</ui:fragment>
+			</h:panelGroup>
+		</h:panelGroup>
 	</h:form>
 	<br/><br/>
 	<h:link value="#{msgs.volverIndice}" outcome="homePage" />
-</body>
+</h:body>
+</f:view>
 </html>

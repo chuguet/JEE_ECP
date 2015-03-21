@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import es.upm.miw.jeeecp.controllers.VerVotacionesController;
 import es.upm.miw.jeeecp.controllers.VotarController;
@@ -12,6 +13,7 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
 @ManagedBean
+@ViewScoped
 public class VerVotacionesBean extends ViewBean {
 
     public VerVotacionesBean() {
@@ -24,7 +26,7 @@ public class VerVotacionesBean extends ViewBean {
     }
 
     private List<String> nivelEstudiosList = new ArrayList<String>();
-    
+
     private List<TemaEntity> temas;
 
     private TemaEntity tema;
@@ -97,8 +99,25 @@ public class VerVotacionesBean extends ViewBean {
         return null;
     }
 
+    public String seleccionarNivelEstudios() {
+        VotarController votarController = this.getControllerFactory().getVotarController();
+        VerVotacionesController verVotacionesController = this.getControllerFactory()
+                .getVerVotacionesController();
+        this.setTema(votarController.buscaTema(this.getTema().getId()));
+        this.setNumeroVotos(verVotacionesController.recuperaNumeroVotos(this.getTema()));
+        this.setMediaVotos(verVotacionesController.recuperaMediaDeVotosPorNivelEstuidos(
+                this.getTema(), this.getNivelEstudios()));
+        return null;
+    }
+
     public String seleccionarTema() {
-        System.out.println("LLEGO");
+        VotarController votarController = this.getControllerFactory().getVotarController();
+        VerVotacionesController verVotacionesController = this.getControllerFactory()
+                .getVerVotacionesController();
+        if (this.getTema().getId() != null) {
+            this.setTema(votarController.buscaTema(this.getTema().getId()));
+            this.setNumeroVotos(verVotacionesController.recuperaNumeroVotos(this.getTema()));
+        }
         return null;
     }
 
@@ -108,12 +127,12 @@ public class VerVotacionesBean extends ViewBean {
         this.setNivelEstudiosList(votarController.recuperaNivelEstudios());
     }
 
-	public List<String> getNivelEstudiosList() {
-		return nivelEstudiosList;
-	}
+    public List<String> getNivelEstudiosList() {
+        return nivelEstudiosList;
+    }
 
-	public void setNivelEstudiosList(List<String> nivelEstudiosList) {
-		this.nivelEstudiosList = nivelEstudiosList;
-	}
+    public void setNivelEstudiosList(List<String> nivelEstudiosList) {
+        this.nivelEstudiosList = nivelEstudiosList;
+    }
 
 }
