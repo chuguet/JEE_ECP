@@ -6,10 +6,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 
 @Entity
+@XmlRootElement
 public class VotoEntity {
 
     public static final String TABLE = "votoentity";

@@ -6,4 +6,6 @@ public interface VotoUris {
 
     String PATH_ID_PARAM = "/{id}";
 
+    String PATH_STUDIES_LEVEL = "/studiesLevels";
+
 }

@@ -1,6 +1,7 @@
 package es.upm.miw.jeeecp.ws.rest;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -20,8 +21,11 @@ import org.apache.logging.log4j.Logger;
 import es.upm.miw.jeeecp.models.daos.DAOFactory;
 import es.upm.miw.jeeecp.models.daos.jpa.DAOJpaFactory;
 import es.upm.miw.jeeecp.models.entities.VotoEntity;
+import es.upm.miw.jeeecp.models.utils.ListStringWrapper;
+import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 import es.upm.miw.jeeecp.ws.VotoUris;
 
+@Path(VotoUris.PATH_VOTOS)
 public class VotoResource {
 
     private final static Logger LOG = LogManager.getLogger(VotoResource.class);
@@ -71,6 +75,20 @@ public class VotoResource {
         List<VotoEntity> votos = DAOFactory.getFactory().getVotoDAO().findAll();
         LOG.debug("GET: " + VotoUris.PATH_VOTOS + ": " + votos);
         return votos;
+    }
+
+    @GET
+    @Path(VotoUris.PATH_STUDIES_LEVEL)
+    @Produces(MediaType.APPLICATION_XML)
+    public ListStringWrapper getStudiesLevel() {
+        NivelEstudios[] nivelEstudios = NivelEstudios.values();
+        List<String> nivelEstudiosList = new ArrayList<String>();
+        for (NivelEstudios nivelEstudiosIt : nivelEstudios) {
+            nivelEstudiosList.add(nivelEstudiosIt.toString());
+        }
+        LOG.debug("GET: " + VotoUris.PATH_VOTOS + "/" + VotoUris.PATH_STUDIES_LEVEL + ": "
+                + nivelEstudiosList);
+        return new ListStringWrapper(nivelEstudiosList);
     }
 
 }
