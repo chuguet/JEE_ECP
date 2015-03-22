@@ -10,4 +10,8 @@ public interface TemaUris {
 
     String PATH_AUTHORIZE = "/authorize";
 
+    String PATH_NUM_VOTES = "/numVotes";
+
+    String PATH_AVG_VOTES = "/avgVotes";
+
 }

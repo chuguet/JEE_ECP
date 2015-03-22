@@ -20,8 +20,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import es.upm.miw.jeeecp.models.daos.DAOFactory;
+import es.upm.miw.jeeecp.models.daos.TemaDAO;
 import es.upm.miw.jeeecp.models.daos.jpa.DAOJpaFactory;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
+import es.upm.miw.jeeecp.models.entities.VotoEntity;
 import es.upm.miw.jeeecp.ws.TemaUris;
 
 @Path(TemaUris.PATH_TEMAS)
@@ -103,6 +105,41 @@ public class TemaResource {
     public String authorize(@QueryParam("code") String code) {
         LOG.debug("GET: " + TemaUris.PATH_TEMAS + "/" + TemaUris.PATH_AUTHORIZE + ": " + code);
         return Boolean.toString(code.equals(CODE));
+    }
+
+    @GET
+    @Path(TemaUris.PATH_ID_PARAM + TemaUris.PATH_NUM_VOTES)
+    public Integer numVotos(@PathParam("id") Integer id) {
+        DAOFactory.setFactory(new DAOJpaFactory());
+        TemaDAO dao = DAOFactory.getFactory().getTemaDAO();
+        Integer numVotos = dao.retrieveVotosFromTema(id).size();
+        LOG.debug("GET: " + TemaUris.PATH_TEMAS + "/" + id + "/" + TemaUris.PATH_NUM_VOTES + ": "
+                + numVotos);
+        return numVotos;
+    }
+
+    @GET
+    @Path(TemaUris.PATH_ID_PARAM + TemaUris.PATH_AVG_VOTES)
+    public Double mediaVotosPorNivelEstudios(@PathParam("id") Integer id,
+            @QueryParam("studiesLevel") String nivelEstudios) {
+        Double resultado = 0d;
+        DAOFactory.setFactory(new DAOJpaFactory());
+        TemaDAO dao = DAOFactory.getFactory().getTemaDAO();
+        List<VotoEntity> votos = dao.retrieveVotosFromTema(id);
+        Double total = 0d;
+        Double suma = 0d;
+        for (VotoEntity voto : votos) {
+            if (voto.getNivelEstudios().toString().equals(nivelEstudios)) {
+                total++;
+                suma += voto.getValoracion();
+            }
+        }
+        if (total != 0) {
+            resultado = suma / total;
+        }
+        LOG.debug("GET: " + TemaUris.PATH_TEMAS + "/" + id + "/" + TemaUris.PATH_NUM_VOTES + ": "
+                + resultado);
+        return resultado;
     }
 
 }

@@ -10,7 +10,7 @@ public class ViewBean implements Serializable {
 
     private static final long serialVersionUID = 8793678886355302470L;
 
-    @ManagedProperty(value = "#{controllerWSFactory}")
+    @ManagedProperty(value = "#{controllerEJBFactory}")
     private ControllerFactory controllerFactory;
 
     public void setControllerFactory(ControllerFactory controllerFactory) {
