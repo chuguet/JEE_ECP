@@ -74,4 +74,16 @@ public class TemaResource {
         return temas;
     }
 
+    @GET
+    @Path(TemaUris.PATH_ID_PARAM + TemaUris.PATH_CREATED_TEMA)
+    public String createdTema(@PathParam("id") Integer id) {
+        Boolean result;
+        DAOFactory.setFactory(new DAOJpaFactory());
+        TemaEntity tema = DAOFactory.getFactory().getTemaDAO().read(id);
+        result = tema != null;
+        LOG.debug("GET: " + TemaUris.PATH_TEMAS + "/" + id + "/" + TemaUris.PATH_CREATED_TEMA
+                + ": " + result);
+        return Boolean.toString(result);
+    }
+
 }

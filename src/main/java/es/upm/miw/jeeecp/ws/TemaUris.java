@@ -6,4 +6,6 @@ public interface TemaUris {
 
     String PATH_ID_PARAM = "/{id}";
 
+    String PATH_CREATED_TEMA = "/createdTema";
+
 }
