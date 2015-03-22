@@ -15,6 +15,8 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 @ViewScoped
 public class EliminarTemaBean extends ViewBean {
 
+    private static final long serialVersionUID = 350076612389441602L;
+
     private String autorizacion;
 
     private boolean autorizado;

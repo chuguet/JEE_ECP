@@ -9,6 +9,8 @@ import es.upm.miw.jeeecp.models.entities.TemaEntity;
 @ManagedBean
 public class AnadirTemaBean extends ViewBean {
 
+    private static final long serialVersionUID = 3010299896868972167L;
+
     private boolean error;
 
     private TemaEntity tema;
@@ -40,7 +42,7 @@ public class AnadirTemaBean extends ViewBean {
     public void setError(boolean error) {
         this.error = error;
     }
-    
+
     public String process() {
         AnadirTemaController anadirTemaController = this.getControllerFactory()
                 .getAnadirTemaController();

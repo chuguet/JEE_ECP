@@ -17,6 +17,8 @@ import es.upm.miw.jeeecp.models.utils.NivelEstudios;
 @ViewScoped
 public class VotarBean extends ViewBean {
 
+    private static final long serialVersionUID = -4958143950068508158L;
+
     public VotarBean() {
     }
 
