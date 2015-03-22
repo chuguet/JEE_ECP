@@ -9,7 +9,7 @@ import es.upm.miw.jeeecp.controllers.EliminarTemaController;
 import es.upm.miw.jeeecp.controllers.VerVotacionesController;
 import es.upm.miw.jeeecp.controllers.VotarController;
 
-@ManagedBean
+@ManagedBean(name = "controllerEJBFactory")
 @ApplicationScoped
 public class ControllerEJBFactory extends ControllerFactory {
 

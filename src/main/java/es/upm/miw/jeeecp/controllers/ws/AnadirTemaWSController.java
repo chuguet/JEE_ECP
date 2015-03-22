@@ -2,19 +2,19 @@ package es.upm.miw.jeeecp.controllers.ws;
 
 import es.upm.miw.jeeecp.controllers.AnadirTemaController;
 import es.upm.miw.jeeecp.models.entities.TemaEntity;
+import es.upm.miw.jeeecp.ws.TemaUris;
 
 public class AnadirTemaWSController implements AnadirTemaController {
 
     @Override
     public void anadirTema(TemaEntity temaEntity) {
-        // TODO Auto-generated method stub
-
+        ControllerWs.buildWebServiceManager(TemaUris.PATH_TEMAS).create(temaEntity);
     }
 
     @Override
     public Boolean existeTema(TemaEntity temaEntity) {
-        // TODO Auto-generated method stub
-        return null;
+        return ControllerWs.buildWebServiceManager(TemaUris.PATH_TEMAS,
+                temaEntity.getId().toString(), TemaUris.PATH_CREATED_TEMA).entityBoolean();
     }
 
 }
