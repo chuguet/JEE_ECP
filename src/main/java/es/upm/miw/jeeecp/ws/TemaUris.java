@@ -8,4 +8,6 @@ public interface TemaUris {
 
     String PATH_CREATED_TEMA = "/createdTema";
 
+    String PATH_AUTHORIZE = "/authorize";
+
 }
