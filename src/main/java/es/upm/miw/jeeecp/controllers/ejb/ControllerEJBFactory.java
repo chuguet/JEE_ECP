@@ -13,24 +13,44 @@ import es.upm.miw.jeeecp.controllers.VotarController;
 @ApplicationScoped
 public class ControllerEJBFactory extends ControllerFactory {
 
+    private AnadirTemaController anadirTemaController;
+
+    private EliminarTemaController eliminarTemaController;
+
+    private VotarController votarController;
+
+    private VerVotacionesController verVotacionesController;
+
     @Override
     public AnadirTemaController getAnadirTemaController() {
-        return new AnadirTemaEJBController();
+        if (this.anadirTemaController == null) {
+            this.anadirTemaController = new AnadirTemaEJBController();
+        }
+        return anadirTemaController;
     }
 
     @Override
     public EliminarTemaController getEliminarTemaController() {
-        return new EliminarTemaEJBController();
+        if (this.eliminarTemaController == null) {
+            this.eliminarTemaController = new EliminarTemaEJBController();
+        }
+        return eliminarTemaController;
     }
 
     @Override
     public VerVotacionesController getVerVotacionesController() {
-        return new VerVotacionesEJBController();
+        if (this.verVotacionesController == null) {
+            this.verVotacionesController = new VerVotacionesEJBController();
+        }
+        return verVotacionesController;
     }
 
     @Override
     public VotarController getVotarController() {
-        return new VotarEJBController();
+        if (this.votarController == null) {
+            this.votarController = new VotarEJBController();
+        }
+        return votarController;
     }
 
 }
