@@ -18,6 +18,8 @@
 		<jstl.version>1.2</jstl.version>
 		<jsf.version>2.2.8</jsf.version>
 		<primefaces.version>5.1</primefaces.version>
+		<jersey.version>2.14</jersey.version>
+		<jersey.jdk.http.version>2.16</jersey.jdk.http.version>
 	</properties>
 
 	<dependencies>
@@ -69,9 +71,26 @@
 			<artifactId>primefaces</artifactId>
 			<version>${primefaces.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-jdk-http</artifactId>
+			<version>${jersey.jdk.http.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<!-- Required only when you are using JAX-RS Client -->
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<finalName>JEE_ECP</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
